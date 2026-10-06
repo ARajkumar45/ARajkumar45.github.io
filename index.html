@@ -37,6 +37,7 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <nav class="nav" aria-label="Primary">
+  <span class="progress" aria-hidden="true"></span>
   <div class="wrap">
     <a class="brand" href="#top" aria-label="RKA Raj Kumar Arumugam, home"><i aria-hidden="true"></i><span class="full">Raj Kumar Arumugam</span><span class="mono-s" aria-hidden="true">RKA</span></a>
     <ul>
@@ -55,7 +56,7 @@
 </nav>
 
 <main id="main">
-<header class="hero wrap" id="top">
+<header class="hero wrap" id="top" data-tone="1">
   <p class="eyebrow mono"><span>AI Engineer</span><span>Bengaluru</span><b>Available immediately</b></p>
   <div class="grid">
     <h1>Raj Kumar<br>Arumugam</h1>
@@ -74,6 +75,7 @@
       <p class="readout" aria-hidden="true"><span class="label">Word error rate</span><span class="num"><span id="wer">5.7</span><small>%</small></span></p>
     </div>
     <div class="wave">
+      <canvas id="wave3d" aria-hidden="true" hidden></canvas>
       <canvas id="wave" role="img" aria-label="Illustration of 30 audio traces. Noise clears from left to right as the page scrolls, matching a word error rate that fell from 5.7 percent to 2.6 percent."></canvas>
     </div>
     <figcaption><span>Scroll: the noise clears as WER falls 5.7% &rarr; 2.6%. Illustrative signal, not recorded audio; figures are from the Bolna ATM voice agent below.</span></figcaption>
@@ -89,11 +91,11 @@
   </div>
 </header>
 
-<section class="sec" id="work" aria-labelledby="work-h">
+<section class="sec" data-tone="1" id="work" aria-labelledby="work-h">
   <div class="wrap">
     <div class="sec-head rv">
       <span class="label">01 / Selected work</span>
-      <h2 id="work-h">Built, then <em>measured</em>.</h2>
+      <h2 id="work-h" data-split>Built, then <em>measured</em>.</h2>
       <p>Two flagship projects, each written up the same way: the problem, what I built, how I measured it, and what came out.</p>
     </div>
 
@@ -127,11 +129,11 @@
               <title id="wer-t">Word error rate before and after</title>
               <desc id="wer-d">Bolna default with Nova-2: 5.7 percent. Nova-3 with en-IN and 30 banking keyterms: 2.6 percent.</desc>
               <text class="t-lab" x="0" y="12">NOVA-2 &middot; BOLNA DEFAULT</text>
-              <rect class="bar" x="0" y="20" width="296.4" height="24"/>
-              <text class="t-val" x="304" y="39">5.7%</text>
+              <rect class="b" id="bar1" x="0" y="20" width="296.4" height="24"/>
+              <text class="t-val" id="val1" x="304" y="39">5.7%</text>
               <text class="t-lab" x="0" y="82">NOVA-3 &middot; EN-IN &middot; 30 KEYTERMS</text>
-              <rect class="bar acc" x="0" y="90" width="135.2" height="24"/>
-              <text class="t-val acc" x="143" y="109">2.6%</text>
+              <rect class="b acc" id="bar2" x="0" y="90" width="135.2" height="24"/>
+              <text class="t-val acc" id="val2" x="143" y="109">2.6%</text>
               <line class="axis" x1="0" y1="128" x2="360" y2="128"/>
               <text class="delta" x="0" y="146">Lower is better. &minus;3.1 percentage points.</text>
             </svg>
@@ -140,11 +142,11 @@
           <div class="viz rv">
             <span class="label">Call path traced through the source</span>
             <ol class="flow">
-              <li>Telephony webhook</li>
-              <li>Websocket audio stream</li>
-              <li>Transcriber<span>Deepgram STT</span></li>
-              <li>LLM<span>OpenAI</span></li>
-              <li>Synthesizer<span>Deepgram TTS</span></li>
+              <li style="--i:0">Telephony webhook</li>
+              <li style="--i:1">Websocket audio stream</li>
+              <li style="--i:2">Transcriber<span>Deepgram STT</span></li>
+              <li style="--i:3">LLM<span>OpenAI</span></li>
+              <li style="--i:4">Synthesizer<span>Deepgram TTS</span></li>
             </ol>
           </div>
         </div>
@@ -169,7 +171,7 @@
             <div><dt>Result</dt><dd><strong>6 accepted ML benchmark tasks</strong> (4 interdependent bugs, pass@5&nbsp;=&nbsp;0.200). Also ran side-by-side model comparisons with evidence-based rationales, and built guardrail and safety verification across containerized AI environments.</dd></div>
           </dl>
 
-          <div class="viz rv">
+          <div class="viz viz-3d rv">
             <span class="label">The rubric: 30 checks, 5 families</span>
             <ol class="rubric" aria-label="Five rubric families with six checks each">
             <li class="fam"><b><i>I</i>Oracle correctness</b><span class="cells" aria-hidden="true"><span class="cell" style="--i:0"></span><span class="cell" style="--i:1"></span><span class="cell" style="--i:2"></span><span class="cell" style="--i:3"></span><span class="cell" style="--i:4"></span><span class="cell" style="--i:5"></span></span></li>
@@ -206,11 +208,11 @@
   </div>
 </section>
 
-<section class="sec sec-alt" id="experience" aria-labelledby="exp-h">
+<section class="sec sec-alt" data-tone="2" id="experience" aria-labelledby="exp-h">
   <div class="wrap">
     <div class="sec-head rv">
       <span class="label">02 / Experience</span>
-      <h2 id="exp-h">From test rigs to <em>model evals</em>.</h2>
+      <h2 id="exp-h" data-split>From test rigs to <em>model evals</em>.</h2>
     </div>
     <div class="tl">
       <article class="tl-item grid rv">
@@ -242,11 +244,11 @@
   </div>
 </section>
 
-<section class="sec" id="skills" aria-labelledby="skills-h">
+<section class="sec" data-tone="1" id="skills" aria-labelledby="skills-h">
   <div class="wrap">
     <div class="sec-head rv">
       <span class="label">03 / Skills</span>
-      <h2 id="skills-h">What I work <em>with</em>.</h2>
+      <h2 id="skills-h" data-split>What I work <em>with</em>.</h2>
     </div>
     <dl class="skills rv">
       <div><dt>Voice AI</dt><dd>Bolna (open source), Deepgram Nova-3 speech-to-text and Aura-2 text-to-speech, OpenAI LLM, Redis, Docker. 8&nbsp;kHz mu-law telephony audio, keyterm prompting, word error rate evaluation (jiwer), websocket streaming.</dd></div>
@@ -259,11 +261,11 @@
   </div>
 </section>
 
-<section class="sec sec-alt" id="credentials" aria-labelledby="cred-h">
+<section class="sec sec-alt" data-tone="2" id="credentials" aria-labelledby="cred-h">
   <div class="wrap">
     <div class="sec-head rv">
       <span class="label">04 / Certifications &amp; education</span>
-      <h2 id="cred-h">Credentials.</h2>
+      <h2 id="cred-h" data-split>Credentials.</h2>
     </div>
     <div class="two rv">
       <div>
@@ -309,10 +311,10 @@
   </div>
 </section>
 
-<section class="sec contact" id="contact" aria-labelledby="contact-h">
+<section class="sec contact" data-tone="1" id="contact" aria-labelledby="contact-h">
   <div class="wrap">
     <span class="label rv" style="display:block;margin-bottom:16px">05 / Contact</span>
-    <h2 id="contact-h" class="rv">Let&rsquo;s build something <em>measurable</em>.</h2>
+    <h2 id="contact-h" data-split>Let&rsquo;s build something <em>measurable</em>.</h2>
     <p class="sub rv">Based in Bengaluru and immediately available for AI engineering roles.</p>
     <a class="mail rv" href="mailto:armugamvrajkumar121@gmail.com">armugamvrajkumar121@gmail.com</a>
     <div class="reach rv">

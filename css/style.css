@@ -97,7 +97,7 @@ a:hover{text-decoration-color:var(--accent);color:var(--accent)}
 .readout .num small{font-size:.5em}
 .wave{position:relative;height:260px;margin-top:var(--s3)}
 .wave canvas{width:100%;height:100%}
-@media (min-width:700px){.wave{height:320px}}
+@media (min-width:700px){.wave{height:380px}}
 .fig figcaption{margin-top:var(--s3);display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;color:var(--mute);font:400 var(--fs-label)/1.5 var(--mono);letter-spacing:.04em}
 .fig figcaption span{max-width:80ch}
 
@@ -162,8 +162,8 @@ a:hover{text-decoration-color:var(--accent);color:var(--accent)}
 .chart .t-lab{font-size:11.5px;letter-spacing:.04em}
 .chart .t-val{font-size:20px;fill:var(--ink)}
 .chart .t-val.acc{fill:var(--accent)}
-.chart .bar{fill:var(--ink);opacity:.85}
-.chart .bar.acc{fill:var(--accent);opacity:1}
+.chart .b{fill:var(--ink);opacity:.85;transition:fill .5s ease}
+.chart .b.acc{fill:var(--accent);opacity:1}
 .chart .axis{stroke:var(--rule);stroke-width:1}
 .chart .delta{font-size:11.5px;fill:var(--mute)}
 .flow{display:grid;gap:0;counter-reset:f}
@@ -265,14 +265,90 @@ a:hover{text-decoration-color:var(--accent);color:var(--accent)}
 /* ───────── Reveal (progressive; content visible without JS) ───────── */
 .js .rv{opacity:0;transform:translateY(14px);transition:opacity .35s ease,transform .35s ease}
 .js .rv.in{opacity:1;transform:none}
-.js .bar{transform:scaleX(0);transform-origin:left center;transform-box:fill-box;transition:transform .5s cubic-bezier(.2,.7,.2,1) .15s}
-.js .in .bar,.js .bar.in{transform:none}
-.js .cell{opacity:0;transition:opacity .3s ease;transition-delay:calc(var(--i,0)*14ms)}
+.js .cell{opacity:0}
 .js .in .cell{opacity:.88}
 .js .in .fam:nth-child(3) .cell:nth-child(4){opacity:1}
 @media (prefers-reduced-motion:reduce){
-  .js .rv,.js .bar,.js .cell{transition:none;opacity:1;transform:none}
+  .js .rv,.js .cell{transition:none;opacity:1;transform:none}
   .js .cell{opacity:.88}
   .js .fam:nth-child(3) .cell:nth-child(4){opacity:1}
 }
 @media print{.nav,.theme,.cta{display:none}body{background:#fff;color:#000}.rv{opacity:1!important;transform:none!important}}
+
+/* ═════════ Motion layer ═════════ */
+/* scroll progress (native scroll-driven where supported, JS fallback otherwise) */
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;pointer-events:none}
+@supports (animation-timeline:scroll()){
+  .progress{animation:prog linear both;animation-timeline:scroll(root)}
+  @keyframes prog{to{transform:scaleX(1)}}
+}
+
+/* hero canvases */
+.wave canvas{position:absolute;inset:0}
+.wave.gl #wave{visibility:hidden}
+.wave #wave3d{display:block}
+
+/* tone shifts between paper tones */
+body{transition:background-color .6s ease}
+body.tone-2{background:var(--bg-2)}
+.js .sec-alt{background:transparent}
+.nav{transition:background-color .6s ease}
+body.tone-2 .nav{background:color-mix(in srgb,var(--bg-2) 92%,transparent)}
+
+/* heading word reveal */
+.js [data-split] .w{display:inline-block;opacity:0;transform:perspective(700px) rotateX(-70deg) translateY(.4em);transform-origin:50% 100%;transition:opacity .45s ease,transform .55s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--wi,0)*50ms)}
+.js [data-split].in .w{opacity:1;transform:none}
+
+/* link underlines */
+.nav ul a,.foot a{position:relative}
+.nav ul a::after,.foot a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.nav ul a:hover::after,.nav ul a:focus-visible::after,.foot a:hover::after,.foot a:focus-visible::after{transform:scaleX(1)}
+.arrow-link{position:relative;border-bottom:0;padding-bottom:5px}
+.arrow-link::before{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--rule)}
+.arrow-link::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.arrow-link:hover::after,.arrow-link:focus-visible::after{transform:scaleX(1)}
+.arrow-link span{display:inline-block;transition:transform .25s ease}
+.arrow-link:hover span{transform:translate(2px,-2px)}
+
+/* panels: tilt + soft cursor highlight (pointer devices only, set by JS) */
+.viz{position:relative}
+.viz>*{position:relative;z-index:1}
+.viz::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .3s ease;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 9%,transparent),transparent 70%)}
+.viz.is-hot::before{opacity:1}
+.viz.is-tilt{transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .35s ease}
+.viz.is-tilt.is-hot{transition:transform .08s linear,opacity .35s ease}
+.btn.is-mag{transition:transform .35s cubic-bezier(.2,.7,.2,1),background-color .2s,color .2s,border-color .2s}
+.btn.is-mag.is-hot{transition:transform .06s linear,background-color .2s,color .2s,border-color .2s}
+
+/* bolna call path: signal runs through the five steps */
+@keyframes lit{0%{background-color:transparent}25%{background-color:color-mix(in srgb,var(--accent) 14%,transparent);border-color:var(--accent)}100%{background-color:transparent}}
+.js .viz.in .flow li{animation:lit 1.1s ease both;animation-delay:calc(.35s + var(--i,0)*.42s)}
+@media (min-width:700px){
+  .flow{position:relative}
+  .flow::after{content:"";position:absolute;left:0;top:-1px;height:2px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;pointer-events:none}
+  .js .viz.in .flow::after{animation:run 2.2s linear .35s both}
+  @keyframes run{0%{transform:scaleX(0);opacity:1}92%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+}
+
+/* rubric: 3D tilt grid */
+.viz-3d{perspective:900px}
+.rubric{transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.rubric .fam,.cells{transform-style:preserve-3d}
+.js .cell{transition:opacity .3s ease calc(var(--i,0)*14ms),transform .18s ease-out 0s}
+.cell{transform:translateZ(calc(var(--l,0)*18px)) scale(calc(1 + var(--l,0)*.12))}
+.rubric .fam b{transition:color .2s ease}
+.rubric .fam.hot b{color:var(--ink)}
+@media (min-width:700px){.rubric .fam{transition:border-color .2s ease}.rubric .fam.hot{border-top-color:var(--accent)}}
+
+/* theme toggle circular reveal */
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition-old(root){z-index:1}
+::view-transition-new(root){z-index:2}
+
+@media (prefers-reduced-motion:reduce){
+  body,.nav{transition:none}
+  .js [data-split] .w{opacity:1;transform:none;transition:none}
+  .js .viz.in .flow li,.js .viz.in .flow::after{animation:none}
+  .rubric,.cell{transform:none!important}
+  .progress{animation:none;display:none}
+}
