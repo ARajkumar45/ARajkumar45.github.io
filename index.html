@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arumugam Raj Kumar — Agentic AI Engineer</title>
-<meta name="description" content="Agentic AI Engineer building multi-agent systems, RAG pipelines, and production GenAI applications.">
+<title>Raj Kumar Arumugam — AI Engineer</title>
+<meta name="description" content="AI Engineer building voice AI pipelines, LLM applications with RAG and tool calling, and adversarial AI evaluation systems.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -45,6 +45,9 @@ body.lock{overflow:hidden}
 /* CANVASES */
 #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 #particle-canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
+#three-hero{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 1.4s var(--ease)}
+#three-hero.in{opacity:1}
+#three-hero canvas{width:100%!important;height:100%!important}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 52px;transition:background .4s,border-color .4s}
@@ -274,10 +277,11 @@ footer{border-top:1px solid var(--bdr);padding:24px 52px;display:flex;justify-co
     <li><a href="#experience" class="dl">Experience</a></li><li><a href="#certs" class="dl">Certifications</a></li>
     <li><a href="#contact" class="dl">Contact</a></li>
   </ul>
-  <div class="drawer-footer">Available for Agentic AI Roles · Chennai</div>
+  <div class="drawer-footer">Available for Agentic AI Roles · Bengaluru</div>
 </div>
 
 <section class="hero">
+  <div id="three-hero"></div>
   <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
   <div class="chips-layer">
     <div class="fchip" style="left:3%;top:17%;--d:9s;--dl:0s">LangChain</div>
@@ -292,12 +296,12 @@ footer{border-top:1px solid var(--bdr);padding:24px 52px;display:flex;justify-co
     <div class="fchip" style="right:20%;top:81%;--d:9.5s;--dl:-8s">Playwright</div>
     <div class="fchip" style="left:40%;top:5%;--d:13s;--dl:-3s">FastAPI</div>
     <div class="fchip" style="left:55%;top:84%;--d:10.5s;--dl:-6s">LangSmith</div>
-    <div class="fchip" style="left:62%;top:13%;--d:9s;--dl:-1.5s">Whisper AI</div>
-    <div class="fchip" style="right:30%;top:75%;--d:11.5s;--dl:-4.5s">MediVoice</div>
+    <div class="fchip" style="left:62%;top:13%;--d:9s;--dl:-1.5s">Deepgram</div>
+    <div class="fchip" style="right:30%;top:75%;--d:11.5s;--dl:-4.5s">Word Error Rate</div>
   </div>
-  <div class="heyline">Agentic AI Engineer &middot; GenAI Developer &middot; Python Backend</div>
-  <h1 class="ht">Building the future<br>with <span class="gt"><span id="typer">intelligent agents</span></span></h1>
-  <p class="hsub">I design and ship multi-agent AI systems, RAG pipelines, and production GenAI applications &mdash; from architecture to deployment.</p>
+  <div class="heyline">AI Engineer &middot; Voice AI &amp; LLM Applications &middot; AI Evaluation</div>
+  <h1 class="ht">Building AI that's<br><span class="gt"><span id="typer">measured, not assumed</span></span></h1>
+  <p class="hsub">I build voice AI pipelines, LLM applications with RAG and tool calling, and adversarial AI evaluation systems &mdash; then measure them with word error rate tests, rubrics, and QC gates instead of taking them on faith.</p>
   <div class="hbtns">
     <div class="mag"><a href="#projects" class="btn btn-p">View Work &#8595;</a></div>
     <div class="mag"><a href="https://github.com/ARajkumar45" target="_blank" rel="noopener" class="btn btn-o">GitHub &#8599;</a></div>
@@ -315,55 +319,58 @@ footer{border-top:1px solid var(--bdr);padding:24px 52px;display:flex;justify-co
 
 <div class="sec" id="projects">
   <div class="slbl rv">Featured Work</div>
-  <h2 class="sh rv d1">Four projects that<br>ship to real users.</h2>
+  <h2 class="sh rv d1">Projects I measured,<br>not just shipped.</h2>
   <div class="bento">
     <div class="bc c8 scan neon-b rv">
       <div class="gblob" style="background:radial-gradient(circle,rgba(0,113,227,.5),transparent);top:-60px;right:-40px;width:220px;height:220px"></div>
       <div class="feat-tag">&#9733; FLAGSHIP</div>
-      <div class="pbrow">Multi-Agent System &middot; GCP &middot; Production</div>
-      <div class="pname">JobHunter AI</div>
-      <div class="pdesc">Production multi-agent job discovery on GCP. Four specialised agents orchestrated via Google ADK &mdash; zero hardcoding, full Vertex AI integration, real-time browser scraping with Playwright.</div>
-      <div class="chips"><span class="chip cb">Google ADK</span><span class="chip cb">Gemini 2.5 Flash</span><span class="chip cb">Vertex AI</span><span class="chip ct">Playwright</span><span class="chip cw">Streamlit</span><span class="chip cw">GCP</span></div>
-      <div class="ndgrid">
-        <div class="nd" style="--nf:3.2s"><div class="ndd" style="background:#2997ff;box-shadow:0 0 6px rgba(41,151,255,.6)"></div>Browser Agent</div>
-        <div class="nd" style="--nf:4.1s"><div class="ndd" style="background:#00c7be;box-shadow:0 0 6px rgba(0,199,190,.6)"></div>Cache Agent</div>
-        <div class="nd" style="--nf:3.7s"><div class="ndd" style="background:#bf5af2;box-shadow:0 0 6px rgba(191,90,242,.6)"></div>Scorer Agent</div>
-        <div class="nd" style="--nf:4.5s"><div class="ndd" style="background:#f5a623;box-shadow:0 0 6px rgba(245,166,35,.6)"></div>Orchestrator</div>
-      </div>
+      <div class="pbrow">Voice AI &middot; Telephony &middot; Oct 2026 (in progress)</div>
+      <div class="pname">Bolna Voice Agent: ATM Issue Desk</div>
+      <div class="pdesc">Ran the open-source Bolna voice-agent stack locally in Docker (Deepgram speech-to-text/text-to-speech, OpenAI LLM, Redis, 8&nbsp;kHz mu-law telephony audio) and traced a real call through it &mdash; webhook, websocket audio stream, transcriber, LLM, synthesizer.</div>
+      <div class="chips"><span class="chip cb">Bolna</span><span class="chip cb">Deepgram Nova-3</span><span class="chip cb">OpenAI</span><span class="chip ct">Docker</span><span class="chip cw">Redis</span><span class="chip cw">FastAPI</span></div>
+      <ul class="flist">
+        <li>Word error rate fell from 5.7% (default Nova-2) to 2.6% with Nova-3 + en-IN + 30 banking keyterms, measured across 180 test transcriptions on 30 recorded ATM-support sentences</li>
+        <li>Built a mock bank API (FastAPI) and a 5-tool ATM issue-desk agent &mdash; card status, block card, balance, mini statement, complaint &mdash; requiring caller confirmation before a card is blocked</li>
+        <li>Found and traced 3 real framework bugs: a Deepgram HTTP 400 from a mu-law/24&nbsp;kHz mismatch, a call endpoint that reports success even when Twilio rejects the call, and a Docker build pulling upstream code instead of the fork</li>
+      </ul>
+      <a href="https://github.com/ARajkumar45/bolna-atm-usecase" target="_blank" rel="noopener" class="plink">View on GitHub &#8599;</a>
     </div>
     <div class="c4" style="display:flex;flex-direction:column;gap:14px">
       <div class="bc rv d1 neon-b" style="flex:1">
-        <div class="statbox"><div class="statn" style="color:var(--bl)">4</div><div class="statl">Specialised agents with independent tool execution</div></div>
+        <div class="statbox"><div class="statn" style="color:var(--bl)">5.7%&rarr;2.6%</div><div class="statl">Word error rate, default vs. tuned Deepgram config</div></div>
       </div>
       <div class="bc rv d2 neon-p" style="flex:1;background:linear-gradient(135deg,rgba(0,113,227,.07),rgba(191,90,242,.05))">
-        <div class="pbrow" style="margin-bottom:8px;font-size:9px">Architecture</div>
-        <div style="font-size:14px;font-weight:500;line-height:1.5;color:rgba(255,255,255,.7);position:relative;z-index:1">Zero hardcoding. PDF resume parsing + dynamic agent routing via Google ADK.</div>
+        <div class="pbrow" style="margin-bottom:8px;font-size:9px">Method</div>
+        <div style="font-size:14px;font-weight:500;line-height:1.5;color:rgba(255,255,255,.7);position:relative;z-index:1">jiwer word error rate on 180 transcriptions, not a demo video.</div>
       </div>
     </div>
     <div class="bc c6 scan neon-g rv">
       <div class="gblob" style="background:radial-gradient(circle,rgba(48,209,88,.4),transparent);bottom:-50px;left:-30px;width:200px;height:200px"></div>
-      <div class="new-tag">&#10022; NEW</div>
-      <div class="pbrow">Healthcare AI &middot; Voice &middot; Clinical NLP</div>
-      <div class="pname">MediVoice AI</div>
-      <div class="pdesc">AI-powered medical voice documentation. Converts doctor-patient conversations into structured clinical SOAP notes via Whisper STT, LangChain entity extraction, and LLM-based generation.</div>
-      <div class="chips"><span class="chip cg">Whisper AI</span><span class="chip cg">Clinical NLP</span><span class="chip ct">LangChain</span><span class="chip cw">SOAP Notes</span><span class="chip cw">Streamlit</span></div>
-      <div class="medpipe">
-        <div class="mpn"><div class="mpd"></div>Voice Capture &rarr; Whisper STT</div>
-        <div class="mpn"><div class="mpd"></div>NLP Entity Extraction</div>
-        <div class="mpn"><div class="mpd"></div>LLM SOAP Note Generation</div>
+      <div class="new-tag">&#10022; CURRENT ROLE</div>
+      <div class="pbrow">AI Evaluation &middot; Benchmark Design &middot; QC Automation</div>
+      <div class="pname">Adversarial AI Evaluation Pipelines</div>
+      <div class="pdesc">At Handshake AI: architected end-to-end evaluation pipelines for frontier model benchmarking &mdash; a 30-check adversarial rubric across five quality families, each with CI-verifiable mutation probes and automated QC gates.</div>
+      <div class="chips"><span class="chip cg">Adversarial Rubrics</span><span class="chip cg">Mutation Testing</span><span class="chip ct">Docker</span><span class="chip cw">pass@k</span><span class="chip cw">Anti-Cheat</span></div>
+      <div class="ndgrid">
+        <div class="nd" style="--nf:3.2s"><div class="ndd" style="background:#2997ff;box-shadow:0 0 6px rgba(41,151,255,.6)"></div>Oracle Correctness</div>
+        <div class="nd" style="--nf:4.1s"><div class="ndd" style="background:#00c7be;box-shadow:0 0 6px rgba(0,199,190,.6)"></div>Contract Coherence</div>
+        <div class="nd" style="--nf:3.7s"><div class="ndd" style="background:#bf5af2;box-shadow:0 0 6px rgba(191,90,242,.6)"></div>Verifier Rigor</div>
+        <div class="nd" style="--nf:4.5s"><div class="ndd" style="background:#f5a623;box-shadow:0 0 6px rgba(245,166,35,.6)"></div>Anti-Cheat Isolation</div>
       </div>
-      <a href="https://github.com/ARajkumar45" target="_blank" rel="noopener" class="plink">View on GitHub &#8599;</a>
+      <ul class="flist" style="margin-top:14px">
+        <li>6 accepted ML benchmark tasks using compensatory fault architectures (4 interdependent bugs, pass@5 = 0.200)</li>
+        <li>Reproducible Docker environments with runtime-injected hidden datasets and hash-pinned inputs</li>
+      </ul>
     </div>
     <div class="bc c6 scan neon-t rv d1">
       <div class="gblob" style="background:radial-gradient(circle,rgba(0,199,190,.35),transparent);top:-50px;right:-30px;width:200px;height:200px"></div>
-      <div class="pbrow">RAG Application &middot; Live &middot; LangSmith</div>
+      <div class="pbrow">RAG Application &middot; Mar 2026 &middot; Streamlit</div>
       <div class="pname">CareerLens AI</div>
-      <div class="pdesc">End-to-end RAG pipeline. Document ingestion &rarr; NVIDIAEmbeddings &rarr; ChromaDB &rarr; hybrid retrieval &rarr; LLM grounding &rarr; structured career roadmap output.</div>
-      <div class="chips"><span class="chip ct">LangChain</span><span class="chip ct">NVIDIA Llama-3.3-70B</span><span class="chip cw">ChromaDB</span><span class="chip cw">Tavily</span><span class="chip cw">LangSmith</span></div>
+      <div class="pdesc">Retrieval-augmented resume analyzer: PDF resume loading, 1,000-character chunks with 200 overlap, NVIDIA embeddings (nv-embedqa-e5-v5) and top-5 similarity search against the job description, feeding Llama 3.3 70B.</div>
+      <div class="chips"><span class="chip ct">LangChain</span><span class="chip ct">NVIDIA Llama-3.3-70B</span><span class="chip cw">Embeddings</span><span class="chip cw">Streamlit</span></div>
       <ul class="flist">
-        <li>Embedding + Tavily hybrid retrieval with relevance grounding</li>
-        <li>Personalised daily schedule + week-by-week roadmap generation</li>
-        <li>Salary prediction, gap analysis, real-time market intelligence</li>
+        <li>Match score, matching and missing skills, three resume improvements</li>
+        <li>Apply-or-skip verdict generated directly in the Streamlit interface</li>
       </ul>
       <a href="https://github.com/ARajkumar45/CareerLens-AI" target="_blank" rel="noopener" class="plink">View on GitHub &#8599;</a>
     </div>
@@ -397,12 +404,12 @@ footer{border-top:1px solid var(--bdr);padding:24px 52px;display:flex;justify-co
   <div class="slbl rv">Technical Stack</div>
   <h2 class="sh rv d1">The tools I build with.</h2>
   <div class="skgrid">
-    <div class="skc rv"><div class="skh"><div class="ski" style="background:rgba(41,151,255,.12)">&#129302;</div>Agentic AI / GenAI</div><div class="sktags"><span class="skt hb">LangChain</span><span class="skt hb">LangGraph</span><span class="skt hb">Google ADK</span><span class="skt hb">Multi-Agent</span><span class="skt">Tool Calling</span><span class="skt">RAG Pipelines</span><span class="skt">LLM Routing</span><span class="skt">Prompt Engineering</span><span class="skt">Agent Orchestration</span></div></div>
-    <div class="skc rv d1"><div class="skh"><div class="ski" style="background:rgba(0,199,190,.1)">&#129504;</div>Knowledge Base / RAG</div><div class="sktags"><span class="skt ht">ChromaDB</span><span class="skt ht">Embedding Search</span><span class="skt ht">Hybrid Search</span><span class="skt">NVIDIAEmbeddings</span><span class="skt">Grounding</span><span class="skt">Reranking</span><span class="skt">Tavily</span><span class="skt">Vector Stores</span><span class="skt">LangSmith</span></div></div>
-    <div class="skc rv d2"><div class="skh"><div class="ski" style="background:rgba(191,90,242,.1)">&#9729;&#65039;</div>LLMs &amp; Cloud</div><div class="sktags"><span class="skt hb">Gemini 2.5 Flash</span><span class="skt hb">Vertex AI</span><span class="skt hb">GCP</span><span class="skt">NVIDIA Llama-3.3-70B</span><span class="skt">Streamlit Cloud</span><span class="skt">Render</span><span class="skt">AWS Basics</span></div></div>
-    <div class="skc rv"><div class="skh"><div class="ski" style="background:rgba(48,209,88,.08)">&#129658;</div>Healthcare AI / Voice</div><div class="sktags"><span class="skt hg">Whisper AI</span><span class="skt hg">Medical NLP</span><span class="skt hg">SOAP Notes</span><span class="skt">Speech-to-Text</span><span class="skt">Clinical NLP</span><span class="skt">Entity Extraction</span></div></div>
-    <div class="skc rv d1"><div class="skh"><div class="ski" style="background:rgba(245,166,35,.1)">&#9881;&#65039;</div>Backend &amp; APIs</div><div class="sktags"><span class="skt hb">Python</span><span class="skt hb">FastAPI</span><span class="skt">REST APIs</span><span class="skt">Pydantic</span><span class="skt">pytest</span><span class="skt">Django Basics</span><span class="skt">PostgreSQL</span><span class="skt">Async Python</span></div></div>
-    <div class="skc rv d2"><div class="skh"><div class="ski" style="background:rgba(41,151,255,.08)">&#128295;</div>Automation &amp; Testing</div><div class="sktags"><span class="skt hb">Robot Framework</span><span class="skt hb">Playwright</span><span class="skt">PyQt5</span><span class="skt">Eval Datasets</span><span class="skt">Regression Testing</span><span class="skt">Behaviour Monitoring</span><span class="skt">GitHub</span></div></div>
+    <div class="skc rv"><div class="skh"><div class="ski" style="background:rgba(48,209,88,.1)">&#127908;</div>Voice AI Pipelines</div><div class="sktags"><span class="skt hg">Bolna</span><span class="skt hg">Deepgram Nova-3</span><span class="skt hg">Aura-2 TTS</span><span class="skt">8kHz mu-law Telephony</span><span class="skt">Keyterm Prompting</span><span class="skt">jiwer / WER Evaluation</span><span class="skt">WebSocket Streaming</span></div></div>
+    <div class="skc rv d1"><div class="skh"><div class="ski" style="background:rgba(0,199,190,.1)">&#129504;</div>LLM Applications &amp; RAG</div><div class="sktags"><span class="skt ht">LangChain</span><span class="skt ht">RAG Pipelines</span><span class="skt">NVIDIA Embeddings</span><span class="skt">Vector Similarity Search</span><span class="skt">Prompt-Level Guardrails</span></div></div>
+    <div class="skc rv d2"><div class="skh"><div class="ski" style="background:rgba(191,90,242,.1)">&#129302;</div>Agentic AI &amp; Tool Calling</div><div class="sktags"><span class="skt hb">Function / Tool Calling</span><span class="skt hb">Google ADK</span><span class="skt hb">MCP Connectors</span><span class="skt">REST API Integration</span><span class="skt">Claude Agent Workflows</span></div></div>
+    <div class="skc rv"><div class="skh"><div class="ski" style="background:rgba(41,151,255,.1)">&#9729;&#65039;</div>LLM APIs &amp; Prompt Engineering</div><div class="sktags"><span class="skt hb">Claude API</span><span class="skt hb">Gemini 2.5 Flash</span><span class="skt">OpenAI GPT</span><span class="skt">Llama 3.3-70B</span><span class="skt">Structured Outputs</span><span class="skt">Few-Shot / CoT Prompting</span></div></div>
+    <div class="skc rv d1"><div class="skh"><div class="ski" style="background:rgba(245,166,35,.1)">&#128202;</div>AI Evaluation &amp; Observability</div><div class="sktags"><span class="skt hb">Adversarial Rubrics</span><span class="skt hb">Oracle Verification</span><span class="skt hb">Mutation Testing</span><span class="skt">Anti-Cheat Engineering</span><span class="skt">QC Gate Automation</span><span class="skt">pass@k Calibration</span><span class="skt">LangSmith Tracing</span></div></div>
+    <div class="skc rv d2"><div class="skh"><div class="ski" style="background:rgba(41,151,255,.08)">&#9881;&#65039;</div>Engineering Stack</div><div class="sktags"><span class="skt hb">Python</span><span class="skt hb">FastAPI</span><span class="skt">Docker</span><span class="skt">Redis</span><span class="skt">Git &amp; GitHub Actions CI/CD</span><span class="skt">GCP (Vertex AI)</span><span class="skt">SQL</span><span class="skt">Node.js</span><span class="skt">Robot Framework</span></div></div>
   </div>
 </div>
 
@@ -411,15 +418,26 @@ footer{border-top:1px solid var(--bdr);padding:24px 52px;display:flex;justify-co
   <h2 class="sh rv d1">Where I've built things.</h2>
   <div class="tl">
     <div class="tli rv">
+      <div class="tldot" style="background:var(--pur);box-shadow:0 0 18px rgba(191,90,242,.65)"></div>
+      <div class="tlper">Apr 2026 &ndash; Present</div>
+      <div class="tltit">AI Evaluation &amp; GenAI Engineer, Independent Contractor</div>
+      <div class="tlco" style="color:var(--pur)">Handshake AI &middot; Remote</div>
+      <ul class="tlpts">
+        <li>Architected end-to-end AI evaluation pipelines with 30-check adversarial rubrics across five quality families (oracle correctness, contract coherence, verifier rigor, environment determinism, anti-cheat isolation), each with CI-verifiable mutation probes and automated QC gates</li>
+        <li>Delivered 6 accepted ML benchmark tasks using compensatory fault architectures (4 interdependent bugs, pass@5 = 0.200); built reproducible Docker environments with runtime-injected hidden datasets, anti-cheat controls, and hash-pinned inputs</li>
+        <li>Conducted side-by-side (SxS) model output comparisons with structured evidence-based rationales; performed code quality evaluation covering syntactical validity, logic correctness, security vulnerability analysis, and failure mode categorisation</li>
+        <li>Designed guardrails and safety verification pipelines including symlink escape detection, behavioral injection testing, and privilege-separation verification across containerized AI environments</li>
+      </ul>
+    </div>
+    <div class="tli rv">
       <div class="tldot"></div>
-      <div class="tlper">Feb 2024 &ndash; Apr 2025</div>
-      <div class="tltit">Software Engineer &mdash; Python Automation</div>
+      <div class="tlper">Feb 2024 &ndash; Apr 2026</div>
+      <div class="tltit">Graduate Engineer Trainee</div>
       <div class="tlco">HCL Technologies &middot; Chennai</div>
       <ul class="tlpts">
-        <li>Production Python automation using Robot Framework for aerospace systems &mdash; zero-defect delivery on safety-critical components</li>
-        <li>Built PyQt5 desktop GUI tooling for internal workflow automation and testing dashboards</li>
-        <li>Developed evaluation datasets and regression testing frameworks for non-deterministic model outputs</li>
-        <li>Code reviews, technical documentation, cross-functional collaboration across software, QA, and hardware teams</li>
+        <li>Designed and delivered Python automation frameworks for aerospace systems testing (Robot Framework, PyQt5), reducing manual QA cycles by 40% across three client sites; maintained 98% deployment uptime SLA</li>
+        <li>Served as primary technical liaison &mdash; weekly client demonstrations, translating requirements into deliverables, training end-users on automation tools</li>
+        <li>Led embedded systems research collaboration with IISc Bangalore (below): resolved I2C latency from 200ms to sub-50ms through protocol-level diagnosis</li>
       </ul>
     </div>
     <div class="tli rv d1">
@@ -428,9 +446,8 @@ footer{border-top:1px solid var(--bdr);padding:24px 52px;display:flex;justify-co
       <div class="tltit">AI Research Engineer (Deputation)</div>
       <div class="tlco" style="color:var(--teal)">IISc Bangalore &middot; via HCL Technologies</div>
       <ul class="tlpts">
-        <li>Gesture recognition AI system using STM32 microcontrollers and Time-of-Flight sensor arrays at India's top research institute</li>
-        <li>End-to-end sensor data pipeline design &mdash; from raw signal capture to classification model validation</li>
-        <li>Behaviour monitoring and regression testing under real-world conditions for non-deterministic model outputs</li>
+        <li>Developed a gesture recognition AI prototype using STM32 microcontrollers and Time-of-Flight sensor arrays at India's top research institute</li>
+        <li>Resolved I2C latency from 200ms to sub-50ms through protocol-level diagnosis &mdash; end-to-end sensor pipeline from raw signal capture to classification model validation</li>
         <li>Collaborated with IISc research faculty on embedded AI system design and deployment</li>
       </ul>
     </div>
@@ -441,12 +458,12 @@ footer{border-top:1px solid var(--bdr);padding:24px 52px;display:flex;justify-co
   <div class="slbl rv">Credentials</div>
   <h2 class="sh rv d1">Certified across the<br>AI stack.</h2>
   <div class="cgrid">
-    <div class="cc hl rv"><div class="cci" style="background:rgba(191,90,242,.14)">&#129902;</div><div><div class="ccn">Google DeepMind Certification</div><div class="ccb">Google DeepMind &middot; 2025&ndash;2026</div><div class="cbadge cbpur">&#10022; DeepMind</div></div></div>
-    <div class="cc hl rv d1"><div class="cci" style="background:rgba(0,113,227,.14)">&#128279;</div><div><div class="ccn">LangChain Academy Certification</div><div class="ccb">LangChain Inc. &middot; Mar 2026 &middot; ID: mdhwmzyi6h</div><div class="cbadge cbblue">&#10003; Verified</div></div></div>
-    <div class="cc rv d2"><div class="cci" style="background:rgba(0,199,190,.12)">&#9729;&#65039;</div><div><div class="ccn">Fundamentals of Agent Development Kit</div><div class="ccb">Google Cloud &middot; 2026</div><div class="cbadge cbteal">GCP</div></div></div>
-    <div class="cc rv d3"><div class="cci" style="background:rgba(0,199,190,.12)">&#129302;</div><div><div class="ccn">Architect Multi-Agent Systems with ADK</div><div class="ccb">Google Cloud &middot; 2026</div><div class="cbadge cbteal">GCP</div></div></div>
-    <div class="cc rv d4"><div class="cci" style="background:rgba(245,166,35,.12)">&#9881;&#65039;</div><div><div class="ccn">Python Production Automation</div><div class="ccb">HCL Technologies &middot; 2024</div><div class="cbadge cbamb">HCL</div></div></div>
-    <div class="cc rv d5" style="border-style:dashed;opacity:.5"><div class="cci" style="background:rgba(255,255,255,.05)">&#127919;</div><div><div class="ccn" style="color:var(--muted)">AWS Certified ML Specialty</div><div class="ccb">In Progress &middot; 2026</div><div class="cbadge cbdim">Upcoming</div></div></div>
+    <div class="cc hl rv"><div class="cci" style="background:rgba(0,113,227,.14)">&#129302;</div><div><div class="ccn">ADK Architect</div><div class="ccb">Google Cloud &middot; ID: 23321472</div><div class="cbadge cbblue">&#10003; Verified</div></div></div>
+    <div class="cc rv d1"><div class="cci" style="background:rgba(0,199,190,.12)">&#9729;&#65039;</div><div><div class="ccn">Agent Fundamentals / Vertex AI Studio / ADK Fundamentals</div><div class="ccb">Google Cloud &middot; 2026</div><div class="cbadge cbteal">GCP</div></div></div>
+    <div class="cc rv d2"><div class="cci" style="background:rgba(191,90,242,.14)">&#129902;</div><div><div class="ccn">Build Your Own SLM / Represent Your Language Data / Tokenize Texts into Subword Tokens</div><div class="ccb">Google DeepMind &middot; 2026</div><div class="cbadge cbpur">&#10022; DeepMind</div></div></div>
+    <div class="cc rv d3"><div class="cci" style="background:rgba(48,209,88,.1)">&#129309;</div><div><div class="ccn">AI Fluency for Builders</div><div class="ccb">Anthropic / CodePath</div><div class="cbadge cbteal">Verified</div></div></div>
+    <div class="cc rv d4"><div class="cci" style="background:rgba(0,113,227,.14)">&#128279;</div><div><div class="ccn">LangChain Academy Certification</div><div class="ccb">Anthropic / CodePath &middot; ID: mdhwmzyi6h</div><div class="cbadge cbblue">&#10003; Verified</div></div></div>
+    <div class="cc rv d5"><div class="cci" style="background:rgba(245,166,35,.12)">&#128172;</div><div><div class="ccn">ChatGPT Prompt Engineering for Developers</div><div class="ccb">DeepLearning.AI &middot; 2026</div><div class="cbadge cbamb">Verified</div></div></div>
   </div>
 </div>
 
@@ -454,7 +471,7 @@ footer{border-top:1px solid var(--bdr);padding:24px 52px;display:flex;justify-co
   <div class="ctglow"></div>
   <div class="slbl rv" style="justify-content:center;margin-bottom:16px">Get In Touch</div>
   <div class="cth rv d1">Ready to build<br>something real.</div>
-  <p class="cts rv d2">Available immediately. Open to Pune, Bengaluru, Chennai or fully remote Agentic AI roles.</p>
+  <p class="cts rv d2">Available immediately. Based in Bengaluru, open to Pune, Chennai or fully remote Agentic AI roles.</p>
   <div class="ctbtns rv d3">
     <div class="mag"><a href="mailto:armugamvrajkumar121@gmail.com" class="btn btn-p">Send Email &rarr;</a></div>
     <div class="mag"><a href="https://github.com/ARajkumar45" target="_blank" rel="noopener" class="btn btn-o">GitHub &#8599;</a></div>
@@ -462,7 +479,7 @@ footer{border-top:1px solid var(--bdr);padding:24px 52px;display:flex;justify-co
   </div>
   <div class="ctinfo rv d4">
     <a href="tel:+917981031170">+91 7981031170</a>
-    <span>Chennai, India</span>
+    <span>Bengaluru, India</span>
     <a href="https://github.com/ARajkumar45" target="_blank" rel="noopener">github.com/ARajkumar45</a>
   </div>
 </div>
@@ -474,6 +491,7 @@ footer{border-top:1px solid var(--bdr);padding:24px 52px;display:flex;justify-co
     <a href="mailto:armugamvrajkumar121@gmail.com">Email</a>
   </div>
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 
 /* LOADER */
@@ -544,7 +562,7 @@ if(!isMob){
 }
 
 /* TYPEWRITER */
-const words=['intelligent agents','AI pipelines','GenAI products','multi-agent systems','healthcare AI','voice AI apps','RAG systems'];
+const words=['measured, not assumed','voice AI pipelines','RAG applications','adversarial evaluations','tool-calling agents','production AI systems'];
 const tyEl=document.getElementById('typer');
 let wi=0,ci=0,del=false,pause=false;
 function tStep(){
@@ -796,6 +814,102 @@ window.addEventListener('scroll',()=>{
     requestAnimationFrame(animate);
   }
   animate();
+})();
+
+/* 3D AGENTIC NETWORK — WebGL hero centerpiece */
+(function(){
+  if(isMob||typeof THREE==='undefined')return;
+  const mount=document.getElementById('three-hero');
+  if(!mount)return;
+  let w=innerWidth,h=innerHeight;
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(50,w/h,0.1,100);
+  camera.position.z=9;
+  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(w,h);
+  mount.appendChild(renderer.domElement);
+
+  const group=new THREE.Group();
+  scene.add(group);
+
+  /* Core — wireframe icosahedron, "the model" */
+  const coreGeo=new THREE.IcosahedronGeometry(2.1,1);
+  const coreMat=new THREE.MeshBasicMaterial({color:0x2997ff,wireframe:true,transparent:true,opacity:.38});
+  const core=new THREE.Mesh(coreGeo,coreMat);
+  group.add(core);
+
+  /* Agent nodes orbiting the core, connected by lines — "multi-agent orchestration" */
+  const AGENTS=8,orbitR=4.1,nodeGroup=new THREE.Group();
+  const colors=[0x2997ff,0x00c7be,0xbf5af2,0xf5a623];
+  const nodeMeshes=[],linePositions=[];
+  for(let i=0;i<AGENTS;i++){
+    const phi=Math.acos(1-2*(i+.5)/AGENTS),theta=Math.PI*(1+Math.sqrt(5))*i;
+    const x=orbitR*Math.cos(theta)*Math.sin(phi),y=orbitR*Math.sin(theta)*Math.sin(phi),z=orbitR*Math.cos(phi);
+    const col=colors[i%colors.length];
+    const geo=new THREE.SphereGeometry(0.095,16,16);
+    const mat=new THREE.MeshBasicMaterial({color:col});
+    const node=new THREE.Mesh(geo,mat);
+    node.position.set(x,y,z);
+    node.userData={base:new THREE.Vector3(x,y,z),phase:Math.random()*Math.PI*2,col};
+    nodeGroup.add(node);nodeMeshes.push(node);
+    const glow=new THREE.Mesh(new THREE.SphereGeometry(0.2,12,12),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.18}));
+    glow.position.copy(node.position);node.userData.glow=glow;nodeGroup.add(glow);
+    linePositions.push(0,0,0,x,y,z);
+  }
+  group.add(nodeGroup);
+  const lineGeo=new THREE.BufferGeometry();
+  lineGeo.setAttribute('position',new THREE.Float32BufferAttribute(linePositions,3));
+  const lineMat=new THREE.LineBasicMaterial({color:0x2997ff,transparent:true,opacity:.22});
+  const lines=new THREE.LineSegments(lineGeo,lineMat);
+  group.add(lines);
+
+  /* faint starfield for depth */
+  const starGeo=new THREE.BufferGeometry();
+  const starCount=220,starPos=new Float32Array(starCount*3);
+  for(let i=0;i<starCount*3;i++)starPos[i]=(Math.random()-.5)*26;
+  starGeo.setAttribute('position',new THREE.Float32BufferAttribute(starPos,3));
+  const stars=new THREE.Points(starGeo,new THREE.PointsMaterial({color:0xffffff,size:0.025,transparent:true,opacity:.35}));
+  scene.add(stars);
+
+  let mx=0,my=0;
+  window.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5);},{passive:true});
+
+  function resize(){
+    w=innerWidth;h=innerHeight;
+    camera.aspect=w/h;camera.updateProjectionMatrix();
+    renderer.setSize(w,h);
+  }
+  window.addEventListener('resize',resize);
+
+  const heroEl=document.querySelector('.hero');
+  const io=new IntersectionObserver(es=>es.forEach(e=>mount.classList.toggle('in',e.isIntersecting)),{threshold:.1});
+  if(heroEl)io.observe(heroEl);
+
+  const clock=new THREE.Clock();
+  let visible=true;
+  document.addEventListener('visibilitychange',()=>{visible=!document.hidden;});
+  function tick(){
+    requestAnimationFrame(tick);
+    if(!visible)return;
+    const t=clock.getElapsedTime();
+    group.rotation.y=t*0.09+mx*0.5;
+    group.rotation.x=Math.sin(t*0.12)*0.12+my*0.35;
+    core.rotation.y=-t*0.05;
+    nodeMeshes.forEach(n=>{
+      const b=n.userData.base,ph=n.userData.phase;
+      const pulse=1+Math.sin(t*1.6+ph)*0.12;
+      n.position.set(b.x*pulse,b.y*pulse,b.z*pulse);
+      n.userData.glow.position.copy(n.position);
+      const s=1+Math.sin(t*2.2+ph)*0.35;
+      n.userData.glow.scale.setScalar(s);
+    });
+    camera.position.x+=(mx*1.1-camera.position.x)*0.02;
+    camera.position.y+=(-my*1.1-camera.position.y)*0.02;
+    camera.lookAt(0,0,0);
+    renderer.render(scene,camera);
+  }
+  tick();
 })();
 
 </script>
