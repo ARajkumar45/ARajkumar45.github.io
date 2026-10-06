@@ -1,926 +1,342 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Raj Kumar Arumugam — AI Engineer</title>
-<meta name="description" content="AI Engineer building voice AI pipelines, LLM applications with RAG and tool calling, and adversarial AI evaluation systems. Bengaluru, immediately available.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Raj Kumar Arumugam | AI Engineer: Voice AI, LLM Apps, AI Evaluation</title>
+<meta name="description" content="AI engineer in Bengaluru building voice agents and LLM applications, and the evaluations that measure them. Voice AI word error rate cut from 5.7% to 2.6%; 30-check adversarial rubrics; Google ADK Architect certified.">
+<link rel="canonical" href="https://arajkumar45.github.io/">
+<meta name="author" content="Raj Kumar Arumugam">
+<meta name="theme-color" content="#F4F1EA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131210" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Raj Kumar Arumugam — AI Engineer">
-<meta property="og:description" content="Voice AI, LLM applications (RAG, tool calling) and AI evaluation. Measured, not assumed.">
-<meta property="og:image" content="https://arajkumar45.github.io/og.png">
+<meta property="og:site_name" content="Raj Kumar Arumugam">
+<meta property="og:title" content="Raj Kumar Arumugam | AI Engineer">
+<meta property="og:description" content="Voice AI, LLM applications and AI evaluation. Word error rate 5.7% to 2.6% on a Bolna ATM voice agent. Bengaluru, available immediately.">
+<meta property="og:url" content="https://arajkumar45.github.io/">
+<meta property="og:image" content="https://arajkumar45.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Raj Kumar Arumugam, AI Engineer. A waveform that clears from noisy to clean, 5.7% to 2.6% word error rate.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://arajkumar45.github.io/og.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-:root{
-  --blue:#0071e3;--bl:#2997ff;--teal:#00c7be;--pur:#bf5af2;--amb:#f5a623;--grn:#30d158;
-  --bg:#000407;--card:rgba(255,255,255,.038);--card2:rgba(255,255,255,.058);
-  --bdr:rgba(255,255,255,.08);--bdr2:rgba(255,255,255,.15);
-  --txt:#fff;--muted:rgba(255,255,255,.48);--dim:rgba(255,255,255,.24);
-  --ff:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-  --ease:cubic-bezier(.22,1,.36,1);
-}
-body{background:var(--bg);color:var(--txt);font-family:var(--ff);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
-body.lock{overflow:hidden}
-::selection{background:rgba(0,113,227,.32)}
-::-webkit-scrollbar{width:0}
-
-/* LOADER */
-#loader{position:fixed;inset:0;background:var(--bg);z-index:10000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;transition:opacity .6s var(--ease),transform .6s var(--ease)}
-#loader.done{opacity:0;transform:scale(1.04);pointer-events:none}
-.ld-ring{width:48px;height:48px;border-radius:50%;border:1.5px solid rgba(255,255,255,.08);border-top-color:var(--bl);animation:spin .8s linear infinite}
-.ld-txt{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--dim);font-weight:500}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* SCROLL PROGRESS */
-#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--pur),var(--teal));width:0%;z-index:9999;box-shadow:0 0 10px rgba(41,151,255,.7),0 0 20px rgba(41,151,255,.3);transition:width .1s linear}
-
-/* CURSOR */
-#cur{position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);will-change:left,top}
-.cur-dot{width:8px;height:8px;background:#fff;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);transition:transform .2s var(--ease),background .2s}
-.cur-ring{width:34px;height:34px;border:1px solid rgba(255,255,255,.38);border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);transition:width .38s var(--ease),height .38s var(--ease),border-color .3s,opacity .3s;opacity:.55}
-#cur.hover .cur-dot{transform:translate(-50%,-50%) scale(2.5);background:var(--bl)}
-#cur.hover .cur-ring{width:54px;height:54px;border-color:rgba(41,151,255,.45);opacity:.38}
-#cur.click .cur-dot{transform:translate(-50%,-50%) scale(.55)}
-#cur.click .cur-ring{width:18px;height:18px;opacity:1;border-color:var(--bl)}
-
-/* CANVASES */
-#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-#particle-canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
-#three-hero{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 1.4s var(--ease)}
-#three-hero.in{opacity:1}
-#three-hero canvas{width:100%!important;height:100%!important}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 52px;transition:background .4s,border-color .4s}
-nav.solid{background:rgba(4,7,14,.86);backdrop-filter:saturate(200%) blur(28px);border-bottom:1px solid var(--bdr)}
-.nlogo span{font-size:15px;font-weight:700;letter-spacing:-.4px;background:linear-gradient(90deg,#fff 40%,var(--bl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;cursor:none}
-.nlinks{display:flex;gap:28px;list-style:none;align-items:center}
-.nlinks a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s;cursor:none;position:relative}
-.nlinks a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--bl);transition:width .35s var(--ease);border-radius:1px}
-.nlinks a:hover,.nlinks a.act{color:#fff}
-.nlinks a:hover::after,.nlinks a.act::after{width:100%}
-.nbadge{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.5px;background:rgba(0,199,190,.08);border:1px solid rgba(0,199,190,.18);padding:5px 13px;border-radius:100px}
-.nbadge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);animation:bpulse 2.5s ease infinite;flex-shrink:0}
-@keyframes bpulse{0%,100%{box-shadow:0 0 0 0 rgba(0,199,190,.5)}50%{box-shadow:0 0 0 7px rgba(0,199,190,0)}}
-.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:none;padding:5px}
-.hbg span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform .35s var(--ease),opacity .25s}
-.hbg.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.hbg.open span:nth-child(2){opacity:0;transform:scaleX(0)}
-.hbg.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.drawer{position:fixed;top:54px;inset-inline:0;background:rgba(4,7,14,.97);backdrop-filter:blur(40px);border-bottom:1px solid var(--bdr);z-index:199;transform:translateY(-108%);transition:transform .45s var(--ease);padding:20px 0 28px}
-.drawer.open{transform:translateY(0)}
-.drawer ul{list-style:none}
-.drawer ul li a{display:block;padding:13px 32px;font-size:17px;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s,padding-left .25s var(--ease);cursor:none}
-.drawer ul li a:hover{color:#fff;padding-left:44px}
-.drawer-footer{padding:18px 32px 0;font-size:12px;color:var(--teal);display:flex;align-items:center;gap:8px}
-.drawer-footer::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);animation:bpulse 2.5s ease infinite;flex-shrink:0}
-
-/* HERO */
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 24px 80px;overflow:hidden;z-index:2}
-.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 80%);pointer-events:none;z-index:0}
-.orb{position:absolute;border-radius:50%;pointer-events:none;will-change:transform}
-.o1{width:700px;height:700px;background:radial-gradient(circle,rgba(0,113,227,.14) 0%,transparent 68%);filter:blur(80px);top:-180px;left:-160px;animation:drift 18s ease-in-out infinite}
-.o2{width:580px;height:580px;background:radial-gradient(circle,rgba(191,90,242,.11) 0%,transparent 68%);filter:blur(80px);top:100px;right:-120px;animation:drift 22s ease-in-out infinite;animation-delay:-7s}
-.o3{width:480px;height:480px;background:radial-gradient(circle,rgba(0,199,190,.09) 0%,transparent 68%);filter:blur(80px);bottom:-80px;left:42%;animation:drift 16s ease-in-out infinite;animation-delay:-13s}
-@keyframes drift{0%,100%{transform:translate(0,0)}25%{transform:translate(30px,-22px)}50%{transform:translate(-18px,28px)}75%{transform:translate(22px,14px)}}
-.chips-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1}
-.fchip{position:absolute;padding:5px 13px;border:1px solid rgba(255,255,255,.09);border-radius:100px;font-size:11px;font-weight:500;color:rgba(255,255,255,.3);background:rgba(0,0,0,.4);backdrop-filter:blur(12px);animation:chipFloat var(--d,8s) var(--dl,0s) ease-in-out infinite;white-space:nowrap}
-@keyframes chipFloat{0%,100%{transform:translateY(0) translateX(0) rotate(0deg);opacity:.2}30%{transform:translateY(-22px) translateX(9px) rotate(1.2deg);opacity:.5}65%{transform:translateY(-10px) translateX(-7px) rotate(-.8deg);opacity:.38}80%{transform:translateY(-26px) translateX(5px) rotate(.6deg);opacity:.44}}
-.heyline{font-size:12px;font-weight:700;color:var(--bl);letter-spacing:4px;text-transform:uppercase;margin-bottom:20px;opacity:0;animation:riseUp .8s .3s var(--ease) forwards;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;z-index:2}
-.heyline::before,.heyline::after{content:'';flex:1;max-width:40px;height:1px;background:linear-gradient(90deg,transparent,var(--bl));opacity:.5}
-.heyline::after{background:linear-gradient(90deg,var(--bl),transparent)}
-h1.ht{font-size:clamp(46px,9vw,100px);font-weight:700;line-height:1.0;letter-spacing:-3px;max-width:920px;opacity:0;animation:riseUp .9s .45s var(--ease) forwards;position:relative;z-index:2}
-.gt{background:linear-gradient(135deg,var(--bl) 0%,var(--pur) 45%,var(--teal) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:300% 300%;animation:gshift 10s ease-in-out infinite}
-@keyframes gshift{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
-#typer{border-right:2.5px solid var(--bl);padding-right:4px;animation:cblink .9s step-end infinite}
-@keyframes cblink{0%,100%{border-color:var(--bl)}50%{border-color:transparent}}
-.hsub{font-size:clamp(15px,1.9vw,18px);font-weight:300;color:var(--muted);max-width:490px;margin:22px auto 0;line-height:1.65;opacity:0;animation:riseUp .9s .6s var(--ease) forwards;position:relative;z-index:2}
-.hbtns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:36px;opacity:0;animation:riseUp .9s .75s var(--ease) forwards;position:relative;z-index:2}
-@keyframes riseUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 24px;font-size:13px;font-weight:600;border-radius:100px;text-decoration:none;border:none;cursor:none;font-family:var(--ff);letter-spacing:.1px;transition:transform .3s var(--ease),box-shadow .3s;position:relative;overflow:hidden}
-.btn::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.07);opacity:0;transition:opacity .2s;border-radius:100px}
-.btn:hover::before{opacity:1}
-.btn:active{transform:scale(.94)!important}
-.btn-p{background:var(--blue);color:#fff}.btn-p:hover{box-shadow:0 10px 36px rgba(0,113,227,.45);transform:translateY(-2px)}
-.btn-o{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.12)}.btn-o:hover{background:rgba(255,255,255,.11);transform:translateY(-2px)}
-.btn-g{background:linear-gradient(135deg,rgba(0,113,227,.18),rgba(191,90,242,.12));border:1px solid rgba(255,255,255,.11);color:#fff}.btn-g:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(191,90,242,.22)}
-.hero-metrics{display:flex;justify-content:center;flex-wrap:wrap;margin-top:60px;border-top:1px solid var(--bdr);padding-top:40px;width:100%;max-width:800px;opacity:0;animation:riseUp .9s .92s var(--ease) forwards;position:relative;z-index:2}
-.met{flex:1;min-width:150px;text-align:center;padding:0 24px;border-right:1px solid var(--bdr)}
-.met:last-child{border-right:none}
-.mnum{font-size:44px;font-weight:700;letter-spacing:-2px;line-height:1;display:flex;align-items:baseline;justify-content:center;gap:2px}
-.mnum sup{font-size:19px;color:var(--bl);font-weight:600}
-.mlbl{font-size:10px;color:var(--dim);margin-top:8px;letter-spacing:.5px;text-transform:uppercase}
-.scr-arrow{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0;animation:fadeIn 1s 2s forwards;cursor:none}
-.scr-arrow span{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--dim)}
-.scr-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);position:relative;overflow:hidden}
-.scr-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:linear-gradient(to bottom,transparent,var(--bl),transparent);animation:scanDown 2.2s ease-in-out infinite}
-@keyframes scanDown{0%{top:-100%}100%{top:200%}}
-@keyframes fadeIn{to{opacity:1}}
-
-/* SECTIONS */
-.sec{max-width:1120px;margin:0 auto;padding:130px 52px;position:relative;z-index:2}
-.sec-alt{background:linear-gradient(180deg,transparent,rgba(255,255,255,.012) 50%,transparent)}
-.slbl{font-size:10px;font-weight:700;color:var(--bl);letter-spacing:4.5px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:10px}
-.slbl::after{content:'';flex:1;max-width:36px;height:1px;background:var(--bl);opacity:.4}
-h2.sh{font-size:clamp(30px,5.5vw,58px);font-weight:700;letter-spacing:-1.8px;line-height:1.03;margin-bottom:56px}
-
-/* BENTO */
-.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
-.c12{grid-column:span 12}.c8{grid-column:span 8}.c4{grid-column:span 4}.c6{grid-column:span 6}
-.bc{background:var(--card);border:1px solid var(--bdr);border-radius:24px;padding:32px;position:relative;overflow:hidden;cursor:none;transition:transform .5s var(--ease),border-color .35s,box-shadow .45s,background .3s;transform-style:preserve-3d}
-.bc.tilt{transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-6px);border-color:var(--bdr2);box-shadow:0 32px 80px rgba(0,0,0,.6);background:var(--card2)}
-.bc::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.055),transparent 52%);opacity:0;transition:opacity .3s;pointer-events:none;border-radius:24px}
-.bc.tilt::after{opacity:1}
-.bc.scan::before{content:'';position:absolute;top:-100%;left:0;width:100%;height:60%;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.022),transparent);animation:scanBeam 3.5s ease-in-out infinite;z-index:0;pointer-events:none}
-@keyframes scanBeam{0%{top:-100%}100%{top:220%}}
-.neon-b:hover{border-color:rgba(41,151,255,.35);box-shadow:0 32px 80px rgba(0,0,0,.6),inset 0 0 40px rgba(41,151,255,.03)}
-.neon-t:hover{border-color:rgba(0,199,190,.3);box-shadow:0 32px 80px rgba(0,0,0,.6),inset 0 0 40px rgba(0,199,190,.03)}
-.neon-p:hover{border-color:rgba(191,90,242,.28);box-shadow:0 32px 80px rgba(0,0,0,.6),inset 0 0 40px rgba(191,90,242,.025)}
-.neon-g:hover{border-color:rgba(48,209,88,.28);box-shadow:0 32px 80px rgba(0,0,0,.6),inset 0 0 40px rgba(48,209,88,.025)}
-.gblob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;opacity:.2;transition:opacity .4s}
-.bc:hover .gblob{opacity:.32}
-.feat-tag{position:absolute;top:18px;right:18px;background:linear-gradient(135deg,rgba(41,151,255,.22),rgba(191,90,242,.14));border:1px solid rgba(255,255,255,.13);border-radius:100px;padding:4px 12px;font-size:10px;font-weight:700;color:rgba(255,255,255,.75);letter-spacing:1px;text-transform:uppercase}
-.new-tag{position:absolute;top:18px;right:18px;background:rgba(48,209,88,.12);border:1px solid rgba(48,209,88,.28);border-radius:100px;padding:4px 12px;font-size:10px;font-weight:700;color:var(--grn);letter-spacing:1px;text-transform:uppercase;animation:newG 2.5s ease-in-out infinite}
-@keyframes newG{0%,100%{box-shadow:none}50%{box-shadow:0 0 14px rgba(48,209,88,.3)}}
-.pbrow{font-size:10px;font-weight:700;color:var(--bl);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;position:relative;z-index:1}
-.pname{font-size:24px;font-weight:700;letter-spacing:-.6px;margin-bottom:10px;line-height:1.12;position:relative;z-index:1}
-.pdesc{font-size:13px;color:var(--muted);line-height:1.68;font-weight:300;margin-bottom:18px;position:relative;z-index:1}
-.chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;position:relative;z-index:1}
-.chip{padding:4px 11px;border-radius:100px;font-size:11px;font-weight:500;cursor:none;transition:transform .22s var(--ease)}
-.chip:hover{transform:translateY(-2px)}
-.cb{background:rgba(0,113,227,.12);border:1px solid rgba(0,113,227,.24);color:var(--bl)}
-.ct{background:rgba(0,199,190,.08);border:1px solid rgba(0,199,190,.22);color:var(--teal)}
-.cp{background:rgba(191,90,242,.1);border:1px solid rgba(191,90,242,.24);color:var(--pur)}
-.cg{background:rgba(48,209,88,.08);border:1px solid rgba(48,209,88,.2);color:var(--grn)}
-.cw{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:rgba(255,255,255,.55)}
-.flist{list-style:none;display:flex;flex-direction:column;gap:9px;position:relative;z-index:1}
-.flist li{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;display:flex;gap:10px;align-items:flex-start}
-.flist li::before{content:'';width:4px;height:4px;background:var(--teal);border-radius:50%;flex-shrink:0;margin-top:8px;box-shadow:0 0 6px rgba(0,199,190,.5)}
-.plink{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--bl);text-decoration:none;transition:gap .25s var(--ease);cursor:none;margin-top:16px;position:relative;z-index:1}
-.plink:hover{gap:12px}
-.ndgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:22px;position:relative;z-index:1}
-.nd{background:rgba(255,255,255,.04);border:1px solid var(--bdr);border-radius:12px;padding:10px 14px;font-size:12px;color:rgba(255,255,255,.52);font-weight:500;display:flex;align-items:center;gap:9px;transition:all .3s;cursor:none;animation:ndF var(--nf,3s) ease-in-out infinite}
-.nd:hover{border-color:rgba(41,151,255,.28);background:rgba(0,113,227,.08);color:var(--bl);transform:translateY(-3px)}
-@keyframes ndF{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-.ndd{width:6px;height:6px;border-radius:50%;flex-shrink:0;animation:ndP 2.2s ease-in-out infinite}
-@keyframes ndP{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
-.medpipe{display:flex;flex-direction:column;gap:6px;margin-top:18px;position:relative;z-index:1}
-.mpn{background:rgba(48,209,88,.05);border:1px solid rgba(48,209,88,.13);border-radius:12px;padding:9px 14px;font-size:12px;color:rgba(255,255,255,.5);font-weight:500;display:flex;align-items:center;gap:10px;transition:all .3s;cursor:none}
-.mpn:hover{background:rgba(48,209,88,.1);border-color:rgba(48,209,88,.28);color:var(--grn)}
-.mpd{width:7px;height:7px;border-radius:50%;background:var(--grn);flex-shrink:0;box-shadow:0 0 6px rgba(48,209,88,.5);animation:ndP 2.8s ease-in-out infinite}
-.statbox{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;padding:8px;position:relative;z-index:1}
-.statn{font-size:48px;font-weight:700;letter-spacing:-2.5px;line-height:1;animation:sfloat 4s ease-in-out infinite}
-.statl{font-size:12px;color:var(--muted);line-height:1.4;font-weight:300;max-width:120px;margin-top:8px}
-@keyframes sfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-
-/* SKILLS */
-.skgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
-.skc{background:var(--card);border:1px solid var(--bdr);border-radius:20px;padding:28px;transition:all .45s var(--ease);cursor:none;position:relative;overflow:hidden}
-.skc:hover{border-color:var(--bdr2);background:var(--card2);transform:translateY(-5px) scale(1.01);box-shadow:0 20px 50px rgba(0,0,0,.45)}
-.skh{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:16px;display:flex;align-items:center;gap:9px}
-.ski{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
-.sktags{display:flex;flex-wrap:wrap;gap:7px}
-.skt{padding:5px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;font-size:12px;color:rgba(255,255,255,.58);transition:all .25s var(--ease);cursor:none}
-.skt:hover{background:rgba(255,255,255,.09);color:#fff;transform:translateY(-2px) scale(1.05);border-color:rgba(255,255,255,.12)}
-.skt.hb{background:rgba(0,113,227,.1);border-color:rgba(0,113,227,.2);color:var(--bl)}
-.skt.ht{background:rgba(0,199,190,.07);border-color:rgba(0,199,190,.18);color:var(--teal)}
-.skt.hg{background:rgba(48,209,88,.06);border-color:rgba(48,209,88,.16);color:var(--grn)}
-.skt.hp{background:rgba(191,90,242,.08);border-color:rgba(191,90,242,.18);color:var(--pur)}
-
-/* TIMELINE */
-.tl{position:relative;padding-left:26px}
-.tl::before{content:'';position:absolute;left:0;top:16px;bottom:16px;width:1px;background:linear-gradient(to bottom,var(--blue),rgba(255,255,255,.02))}
-.tli{position:relative;padding:0 0 56px 38px}
-.tldot{position:absolute;left:-38px;top:8px;width:13px;height:13px;border-radius:50%;background:var(--blue);border:2.5px solid var(--bg);box-shadow:0 0 18px rgba(0,113,227,.65);animation:tlp 3.5s ease-in-out infinite}
-@keyframes tlp{0%,100%{box-shadow:0 0 18px rgba(0,113,227,.65)}50%{box-shadow:0 0 32px rgba(0,113,227,.9),0 0 60px rgba(0,113,227,.2)}}
-.tlper{font-size:11px;font-weight:600;color:var(--dim);letter-spacing:.5px;margin-bottom:5px}
-.tltit{font-size:20px;font-weight:700;letter-spacing:-.35px;margin-bottom:4px}
-.tlco{font-size:13px;color:var(--bl);font-weight:500;margin-bottom:16px;display:inline-flex;align-items:center;gap:6px}
-.tlco::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--bl);display:inline-block}
-.tlpts{list-style:none;display:flex;flex-direction:column;gap:9px}
-.tlpts li{font-size:13px;color:var(--muted);line-height:1.65;font-weight:300;padding-left:18px;position:relative}
-.tlpts li::before{content:'';position:absolute;left:0;top:9px;width:7px;height:1px;background:rgba(255,255,255,.2)}
-
-/* CERTS */
-.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.cc{background:var(--card);border:1px solid var(--bdr);border-radius:18px;padding:20px 22px;display:flex;align-items:flex-start;gap:14px;transition:all .38s var(--ease);cursor:none;position:relative;overflow:hidden}
-.cc:hover{border-color:var(--bdr2);background:var(--card2);transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.35)}
-.cc.hl{border-color:rgba(41,151,255,.18);background:linear-gradient(135deg,rgba(0,113,227,.05),rgba(191,90,242,.03))}
-.cc.hl:hover{border-color:rgba(41,151,255,.32);box-shadow:0 14px 36px rgba(0,113,227,.15)}
-.cci{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
-.ccn{font-size:13px;font-weight:600;color:#fff;line-height:1.35;margin-bottom:3px}
-.ccb{font-size:11px;color:var(--dim);line-height:1.4}
-.cbadge{display:inline-flex;align-items:center;gap:4px;margin-top:6px;border-radius:100px;padding:3px 9px;font-size:10px;font-weight:700;letter-spacing:.5px}
-.cbblue{background:rgba(0,113,227,.12);border:1px solid rgba(0,113,227,.2);color:var(--bl)}
-.cbpur{background:rgba(191,90,242,.12);border:1px solid rgba(191,90,242,.2);color:var(--pur)}
-.cbteal{background:rgba(0,199,190,.1);border:1px solid rgba(0,199,190,.2);color:var(--teal)}
-.cbamb{background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.18);color:var(--amb)}
-.cbdim{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:var(--dim)}
-
-/* CONTACT */
-.ctwrap{text-align:center;position:relative;z-index:2;padding:130px 52px 100px;max-width:1120px;margin:0 auto}
-.ctglow{position:absolute;width:500px;height:300px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,113,227,.07),transparent 70%);filter:blur(40px);left:50%;bottom:-40px;transform:translateX(-50%);pointer-events:none}
-.cth{font-size:clamp(36px,6.5vw,68px);font-weight:700;letter-spacing:-2.5px;line-height:1.02;max-width:560px;margin:0 auto 16px}
-.cts{font-size:17px;color:rgba(255,255,255,.34);max-width:380px;margin:0 auto 44px;font-weight:300;line-height:1.6}
-.ctbtns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.ctinfo{margin-top:38px;display:flex;justify-content:center;gap:36px;flex-wrap:wrap;font-size:12px;color:var(--dim)}
-.ctinfo a{color:var(--dim);text-decoration:none;transition:color .2s;cursor:none}
-.ctinfo a:hover{color:var(--bl)}
-footer{border-top:1px solid var(--bdr);padding:24px 52px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--dim);position:relative;z-index:2;max-width:1120px;margin:0 auto}
-.flinks{display:flex;gap:22px}
-.flinks a{color:var(--dim);text-decoration:none;transition:color .22s;cursor:none}
-.flinks a:hover{color:#fff}
-
-/* REVEAL */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
-.rv.in{opacity:1;transform:none}
-.rv.d1{transition-delay:.07s}.rv.d2{transition-delay:.14s}.rv.d3{transition-delay:.21s}.rv.d4{transition-delay:.28s}.rv.d5{transition-delay:.35s}
-
-/* RESPONSIVE */
-@media(max-width:1024px){.skgrid{grid-template-columns:repeat(2,1fr)}.cgrid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){
-  nav{padding:0 20px}.nlinks,.nbadge{display:none}.hbg{display:flex}
-  .sec{padding:76px 20px}.ctwrap{padding:80px 20px 60px}
-  .bento{display:flex;flex-direction:column}.skgrid{grid-template-columns:1fr}.cgrid{grid-template-columns:1fr}
-  .hero-metrics{flex-wrap:wrap}.met{flex:0 0 50%;border-right:none;border-bottom:1px solid var(--bdr);padding-bottom:18px;margin-bottom:4px}
-  .met:nth-child(odd){border-right:1px solid var(--bdr)}.met:last-child,.met:nth-last-child(2):nth-child(odd){border-bottom:none}
-  .ndgrid{grid-template-columns:1fr}
-  footer{flex-direction:column;gap:12px;text-align:center;padding:20px}.flinks{justify-content:center}
-  h2.sh{margin-bottom:36px;letter-spacing:-1px}.chips-layer{display:none}
-}
-@media(max-width:480px){
-  .met{flex:0 0 100%;border-right:none!important}.met:not(:last-child){border-bottom:1px solid var(--bdr)}
-  .hbtns{flex-direction:column;align-items:center}.btn{width:210px;justify-content:center}
-  .ctbtns{flex-direction:column;align-items:center}.ctbtns .btn{width:230px;justify-content:center}
-}
-</style>
+<meta name="twitter:title" content="Raj Kumar Arumugam | AI Engineer">
+<meta name="twitter:description" content="Voice AI, LLM applications and AI evaluation. Bengaluru, available immediately.">
+<meta name="twitter:image" content="https://arajkumar45.github.io/assets/og.png">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/InstrumentSerif.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+(function(){var d=document.documentElement;d.className+=' js';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Raj Kumar Arumugam","jobTitle":"AI Engineer","url":"https://arajkumar45.github.io/","email":"mailto:armugamvrajkumar121@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Bengaluru","addressCountry":"IN"},"alumniOf":{"@type":"CollegeOrUniversity","name":"Panimalar Institute of Technology"},"sameAs":["https://www.linkedin.com/in/rajkumar45","https://github.com/ARajkumar45"],"knowsAbout":["Voice AI","Speech-to-text evaluation","LLM applications","Retrieval-augmented generation","Tool calling","Model Context Protocol","AI evaluation","Python"]}
+</script>
 </head>
 <body>
-<div id="loader"><div class="ld-ring"></div><div class="ld-txt">Loading</div></div>
-<div id="progress"></div>
-<div id="cur"><div class="cur-dot"></div><div class="cur-ring"></div></div>
-<canvas id="bg-canvas"></canvas>
-<canvas id="particle-canvas"></canvas>
+<a class="skip" href="#main">Skip to content</a>
 
-<nav id="nav">
-  <div class="nlogo"><span>Raj Kumar</span></div>
-  <ul class="nlinks">
-    <li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li><li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li><li><a href="#certs">Certifications</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="nbadge">Available Now</div>
-  <button class="hbg" id="hbg" aria-label="Menu"><span></span><span></span><span></span></button>
+<nav class="nav" aria-label="Primary">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="RKA Raj Kumar Arumugam, home"><i aria-hidden="true"></i><span class="full">Raj Kumar Arumugam</span><span class="mono-s" aria-hidden="true">RKA</span></a>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li class="hide-s"><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li>
+        <button class="theme" id="theme" type="button" aria-label="Switch to dark theme">
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+      </li>
+    </ul>
+  </div>
 </nav>
-<div class="drawer" id="drawer">
-  <ul>
-    <li><a href="#about" class="dl">About</a></li><li><a href="#projects" class="dl">Projects</a></li><li><a href="#skills" class="dl">Skills</a></li>
-    <li><a href="#experience" class="dl">Experience</a></li><li><a href="#certs" class="dl">Certifications</a></li>
-    <li><a href="#contact" class="dl">Contact</a></li>
-  </ul>
-  <div class="drawer-footer">Open to AI Engineer roles · Bengaluru</div>
-</div>
 
-<section class="hero">
-  <div id="three-hero"></div>
-  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
-  <div class="chips-layer">
-    <div class="fchip" style="left:3%;top:17%;--d:9s;--dl:0s">LangChain</div>
-    <div class="fchip" style="left:6%;top:58%;--d:11s;--dl:-3s">RAG Pipeline</div>
-    <div class="fchip" style="left:1%;top:38%;--d:8s;--dl:-6s">Multi-Agent</div>
-    <div class="fchip" style="right:3%;top:19%;--d:10s;--dl:-2s">Google ADK</div>
-    <div class="fchip" style="right:2%;top:50%;--d:9.5s;--dl:-5s">Vertex AI</div>
-    <div class="fchip" style="right:5%;top:70%;--d:12s;--dl:-1s">LangGraph</div>
-    <div class="fchip" style="left:16%;top:9%;--d:8.5s;--dl:-4s">Python</div>
-    <div class="fchip" style="right:16%;top:7%;--d:10s;--dl:-7s">Gemini 2.5</div>
-    <div class="fchip" style="left:23%;top:78%;--d:11s;--dl:-2s">ChromaDB</div>
-    <div class="fchip" style="right:20%;top:81%;--d:9.5s;--dl:-8s">Playwright</div>
-    <div class="fchip" style="left:40%;top:5%;--d:13s;--dl:-3s">FastAPI</div>
-    <div class="fchip" style="left:55%;top:84%;--d:10.5s;--dl:-6s">LangSmith</div>
-    <div class="fchip" style="left:62%;top:13%;--d:9s;--dl:-1.5s">Deepgram</div>
-    <div class="fchip" style="right:30%;top:75%;--d:11.5s;--dl:-4.5s">Word Error Rate</div>
+<main id="main">
+<header class="hero wrap" id="top">
+  <p class="eyebrow mono"><span>AI Engineer</span><span>Bengaluru</span><b>Available immediately</b></p>
+  <div class="grid">
+    <h1>Raj Kumar<br>Arumugam</h1>
+    <div class="hero-side">
+      <p class="lede">I build voice agents and LLM applications, then <em>measure</em> whether they work.</p>
+      <div class="cta">
+        <a class="btn btn-fill" href="#work">See the work</a>
+        <a class="btn btn-line" href="#contact">Get in touch</a>
+      </div>
+    </div>
   </div>
-  <div class="heyline">AI Engineer &middot; Voice AI &amp; LLM Applications &middot; AI Evaluation</div>
-  <h1 class="ht">Building AI that's<br><span class="gt"><span id="typer">measured, not assumed</span></span></h1>
-  <p class="hsub">I build voice AI pipelines, LLM applications with RAG and tool calling, and adversarial AI evaluation systems &mdash; then measure them with word error rate tests, rubrics, and QC gates instead of taking them on faith.</p>
-  <div class="hbtns">
-    <div class="mag"><a href="#projects" class="btn btn-p">View Work &#8595;</a></div>
-    <div class="mag"><a href="https://github.com/ARajkumar45" target="_blank" rel="noopener" class="btn btn-o">GitHub &#8599;</a></div>
-    <div class="mag"><a href="https://linkedin.com/in/rajkumar45" target="_blank" rel="noopener" class="btn btn-o">LinkedIn &#8599;</a></div>
-    <div class="mag"><a href="mailto:armugamvrajkumar121@gmail.com" class="btn btn-g">Hire Me &rarr;</a></div>
+
+  <figure class="fig" id="fig">
+    <div class="fig-head">
+      <p class="label">Fig. 1 &middot; Signal, 30 traces</p>
+      <p class="readout" aria-hidden="true"><span class="label">Word error rate</span><span class="num"><span id="wer">5.7</span><small>%</small></span></p>
+    </div>
+    <div class="wave">
+      <canvas id="wave" role="img" aria-label="Illustration of 30 audio traces. Noise clears from left to right as the page scrolls, matching a word error rate that fell from 5.7 percent to 2.6 percent."></canvas>
+    </div>
+    <figcaption><span>Scroll: the noise clears as WER falls 5.7% &rarr; 2.6%. Illustrative signal, not recorded audio; figures are from the Bolna ATM voice agent below.</span></figcaption>
+  </figure>
+
+  <div class="proof" aria-label="Selected numbers">
+    <ul>
+      <li class="rv"><p class="n">2.6<em>%</em></p><p>Word error rate, down from 5.7% on 180 test transcriptions</p></li>
+      <li class="rv"><p class="n">30</p><p>Adversarial checks across five quality families</p></li>
+      <li class="rv"><p class="n">6</p><p>ML benchmark tasks accepted, built for Handshake AI</p></li>
+      <li class="rv"><p class="n">40<em>%</em></p><p>Fewer manual QA cycles from aerospace test automation</p></li>
+    </ul>
   </div>
-  <div class="hero-metrics">
-    <div class="met"><div class="mnum" data-t="2"><sup>+</sup></div><div class="mlbl">Years Python</div></div>
-    <div class="met"><div class="mnum" data-t="6"></div><div class="mlbl">Benchmark Tasks Accepted</div></div>
-    <div class="met"><div class="mnum" data-t="30"></div><div class="mlbl">Check Adversarial Rubric</div></div>
-    <div class="met"><div class="mnum" data-t="10"></div><div class="mlbl">Certifications</div></div>
+</header>
+
+<section class="sec" id="work" aria-labelledby="work-h">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="label">01 / Selected work</span>
+      <h2 id="work-h">Built, then <em>measured</em>.</h2>
+      <p>Two flagship projects, each written up the same way: the problem, what I built, how I measured it, and what came out.</p>
+    </div>
+
+    <article class="case" id="bolna" aria-labelledby="bolna-h">
+      <div class="grid">
+        <div class="case-aside rv">
+          <p class="no" aria-hidden="true">01</p>
+          <h3 id="bolna-h">Bolna Voice Agent: ATM Issue Desk</h3>
+          <div class="meta">
+            <p><span class="label">Stack</span>Python, Docker, Redis, Deepgram, OpenAI, FastAPI</p>
+            <p><span class="label">Status</span><span class="status">In progress &middot; Oct 2026</span></p>
+          </div>
+          <p class="links"><a class="arrow-link" href="https://github.com/ARajkumar45/bolna-atm-usecase" target="_blank" rel="noopener">Code and results on GitHub <span aria-hidden="true">&nearr;</span></a></p>
+        </div>
+        <div class="case-body">
+          <dl class="facts rv">
+            <div><dt>Problem</dt><dd>Phone calls are the hard case for speech-to-text: 8&nbsp;kHz mu-law audio and call-center noise. With Bolna&rsquo;s default settings (Deepgram Nova-2), word error rate on ATM-support sentences was <strong>5.7%</strong>.</dd></div>
+            <div><dt>Built</dt><dd>Ran the open-source Bolna stack locally in Docker (agent server, Redis, Deepgram speech-to-text and text-to-speech, OpenAI LLM) and traced a call through its source. Built a mock bank API in FastAPI and an ATM issue-desk agent with five tools: card status, block card, balance, mini statement and complaint registration. The caller must confirm before a card is blocked.</dd></div>
+            <div><dt>Measured</dt><dd>30 recorded ATM-support sentences, converted to 8&nbsp;kHz phone-quality audio, with and without call-center noise. <strong>180 test transcriptions</strong> scored for word error rate with jiwer.</dd></div>
+            <div><dt>Result</dt><dd><strong>5.7% &rarr; 2.6%</strong> by moving to Nova-3 with en-IN and 30 banking keyterms. Along the way I found and traced three framework issues:
+              <ul class="dash">
+                <li>Deepgram voice rejected with HTTP 400 when a mu-law codec was paired with a 24&nbsp;kHz default sample rate.</li>
+                <li>The call endpoint reports success even when Twilio rejects the call.</li>
+                <li>The Docker build installs upstream code instead of the fork.</li>
+              </ul></dd></div>
+          </dl>
+
+          <div class="viz rv">
+            <span class="label">Word error rate, 180 test transcriptions</span>
+            <svg class="chart" viewBox="0 0 360 150" role="img" aria-labelledby="wer-t wer-d">
+              <title id="wer-t">Word error rate before and after</title>
+              <desc id="wer-d">Bolna default with Nova-2: 5.7 percent. Nova-3 with en-IN and 30 banking keyterms: 2.6 percent.</desc>
+              <text class="t-lab" x="0" y="12">NOVA-2 &middot; BOLNA DEFAULT</text>
+              <rect class="bar" x="0" y="20" width="296.4" height="24"/>
+              <text class="t-val" x="304" y="39">5.7%</text>
+              <text class="t-lab" x="0" y="82">NOVA-3 &middot; EN-IN &middot; 30 KEYTERMS</text>
+              <rect class="bar acc" x="0" y="90" width="135.2" height="24"/>
+              <text class="t-val acc" x="143" y="109">2.6%</text>
+              <line class="axis" x1="0" y1="128" x2="360" y2="128"/>
+              <text class="delta" x="0" y="146">Lower is better. &minus;3.1 percentage points.</text>
+            </svg>
+          </div>
+
+          <div class="viz rv">
+            <span class="label">Call path traced through the source</span>
+            <ol class="flow">
+              <li>Telephony webhook</li>
+              <li>Websocket audio stream</li>
+              <li>Transcriber<span>Deepgram STT</span></li>
+              <li>LLM<span>OpenAI</span></li>
+              <li>Synthesizer<span>Deepgram TTS</span></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="case" id="eval" aria-labelledby="eval-h">
+      <div class="grid">
+        <div class="case-aside rv">
+          <p class="no" aria-hidden="true">02</p>
+          <h3 id="eval-h">Adversarial AI Evaluation Pipelines</h3>
+          <div class="meta">
+            <p><span class="label">Where</span>Handshake AI, independent contractor, remote</p>
+            <p><span class="label">Status</span><span class="status">Apr 2026 &ndash; present</span></p>
+          </div>
+        </div>
+        <div class="case-body">
+          <dl class="facts rv">
+            <div><dt>Problem</dt><dd>A benchmark task is only useful if it is hard for the right reason: a model should fail because of its reasoning, not because of a weak verifier, a flaky environment or a leaked answer.</dd></div>
+            <div><dt>Built</dt><dd>End-to-end evaluation pipelines around a <strong>30-check adversarial rubric</strong> across five quality families, each check with a CI-verifiable mutation probe and automated QC gates. Reproducible Docker environments with runtime-injected hidden datasets, anti-cheat controls and hash-pinned inputs, targeting sub-40% model accuracy.</dd></div>
+            <div><dt>Measured</dt><dd>Oracle verification and mutation testing in CI, <strong>37 executable QC checks</strong>, and pass@k calibration. Tasks use compensatory fault architectures: four interdependent bugs, so a partial fix does not pass.</dd></div>
+            <div><dt>Result</dt><dd><strong>6 accepted ML benchmark tasks</strong> (4 interdependent bugs, pass@5&nbsp;=&nbsp;0.200). Also ran side-by-side model comparisons with evidence-based rationales, and built guardrail and safety verification across containerized AI environments.</dd></div>
+          </dl>
+
+          <div class="viz rv">
+            <span class="label">The rubric: 30 checks, 5 families</span>
+            <ol class="rubric" aria-label="Five rubric families with six checks each">
+            <li class="fam"><b><i>I</i>Oracle correctness</b><span class="cells" aria-hidden="true"><span class="cell" style="--i:0"></span><span class="cell" style="--i:1"></span><span class="cell" style="--i:2"></span><span class="cell" style="--i:3"></span><span class="cell" style="--i:4"></span><span class="cell" style="--i:5"></span></span></li>
+            <li class="fam"><b><i>II</i>Contract coherence</b><span class="cells" aria-hidden="true"><span class="cell" style="--i:6"></span><span class="cell" style="--i:7"></span><span class="cell" style="--i:8"></span><span class="cell" style="--i:9"></span><span class="cell" style="--i:10"></span><span class="cell" style="--i:11"></span></span></li>
+            <li class="fam"><b><i>III</i>Verifier rigor</b><span class="cells" aria-hidden="true"><span class="cell" style="--i:12"></span><span class="cell" style="--i:13"></span><span class="cell" style="--i:14"></span><span class="cell" style="--i:15"></span><span class="cell" style="--i:16"></span><span class="cell" style="--i:17"></span></span></li>
+            <li class="fam"><b><i>IV</i>Environment determinism</b><span class="cells" aria-hidden="true"><span class="cell" style="--i:18"></span><span class="cell" style="--i:19"></span><span class="cell" style="--i:20"></span><span class="cell" style="--i:21"></span><span class="cell" style="--i:22"></span><span class="cell" style="--i:23"></span></span></li>
+            <li class="fam"><b><i>V</i>Anti-cheat isolation</b><span class="cells" aria-hidden="true"><span class="cell" style="--i:24"></span><span class="cell" style="--i:25"></span><span class="cell" style="--i:26"></span><span class="cell" style="--i:27"></span><span class="cell" style="--i:28"></span><span class="cell" style="--i:29"></span></span></li>
+            </ol>
+            <p class="viz-cap">Each square is one check. Each check has a mutation probe that can be verified in CI.</p>
+          </div>
+
+          <div class="probes rv">
+            <p class="probe"><b>Symlink escape</b><span>Detection in containerized AI environments.</span></p>
+            <p class="probe"><b>Behavioral injection</b><span>Testing in the guardrail and safety verification pipelines.</span></p>
+            <p class="probe"><b>Privilege separation</b><span>Verification across containerized AI environments.</span></p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="mini" id="careerlens">
+      <div class="grid rv">
+        <div class="m-head">
+          <span class="label">Also &middot; Mar 2026</span>
+          <h3>CareerLens AI</h3>
+          <p class="chips" style="margin-top:12px"><span>Python</span><span>LangChain</span><span>Streamlit</span></p>
+        </div>
+        <div class="m-body">
+          <p>A retrieval-augmented resume vs job description analyzer. PDF resume loading, 1,000-character chunks with 200 overlap, NVIDIA embeddings (nv-embedqa-e5-v5) and top-5 similarity search against the job description, feeding Llama 3.3 70B.</p>
+          <p>Returns a match score, matching and missing skills, three resume improvements and an apply-or-skip verdict in a Streamlit interface.</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="scr-arrow"><span>Scroll</span><div class="scr-line"></div></div>
 </section>
 
-<div class="sec" id="about">
-  <div class="slbl rv">About</div>
-  <h2 class="sh rv d1">Engineer first.<br>Then I measure it.</h2>
-  <div class="bento">
-    <div class="bc c8 scan neon-b rv">
-      <div class="gblob" style="background:radial-gradient(circle,rgba(0,113,227,.45),transparent);top:-60px;right:-40px;width:220px;height:220px"></div>
-      <div class="pbrow">Professional Summary</div>
-      <div class="pdesc" style="font-size:16px;line-height:1.75;color:rgba(255,255,255,.72)">AI Engineer with 2+ years of Python engineering experience, including hands-on LLM and AI work on Google Cloud. I build LLM applications (RAG with embeddings and vector search, tool calling) and voice AI pipelines (speech-to-text, LLM, text-to-speech), and I measure them: word error rate tests, adversarial rubrics, mutation testing and automated QC gates.</div>
-      <div class="pdesc" style="font-size:16px;line-height:1.75;color:rgba(255,255,255,.72);margin-top:14px">Currently building an ATM helpdesk voice agent on the open-source Bolna framework, with a measured speech-to-text improvement. I use MCP connectors daily in Claude agent workflows. Google ADK Architect certified. Immediately available in Bengaluru.</div>
-      <div class="chips" style="margin-top:20px"><span class="chip cb">Python</span><span class="chip cb">JavaScript</span><span class="chip ct">SQL</span><span class="chip cw">HTML/CSS</span></div>
+<section class="sec sec-alt" id="experience" aria-labelledby="exp-h">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="label">02 / Experience</span>
+      <h2 id="exp-h">From test rigs to <em>model evals</em>.</h2>
     </div>
-    <div class="c4" style="display:flex;flex-direction:column;gap:14px">
-      <div class="bc rv d1 neon-t" style="flex:1">
-        <div class="statbox"><div class="statn" style="color:var(--teal)">8.7</div><div class="statl">CGPA out of 10 &middot; B.E. Electronics &amp; Communication</div></div>
-      </div>
-      <div class="bc rv d2 neon-p" style="flex:1;background:linear-gradient(135deg,rgba(0,113,227,.07),rgba(191,90,242,.05))">
-        <div class="pbrow" style="margin-bottom:8px;font-size:9px">Education &middot; 2019&ndash;2023</div>
-        <div style="font-size:14px;font-weight:500;line-height:1.5;color:rgba(255,255,255,.7);position:relative;z-index:1">Panimalar Institute of Technology, Chennai</div>
-      </div>
-    </div>
-    <div class="bc c12 rv" style="padding:0;overflow:hidden">
-      <img src="og-plate.jpg" alt="Plate VIII: five rubric families of six checks each, signal noise falling from 5.7% to 2.6% word error rate" style="display:block;width:100%;height:auto" loading="lazy">
+    <div class="tl">
+      <article class="tl-item grid rv">
+        <p class="tl-when label">Apr 2026 &ndash; Present</p>
+        <div class="tl-main">
+          <h3>AI Evaluation &amp; GenAI Engineer</h3>
+          <p class="org">Independent Contractor &middot; Handshake AI, Remote</p>
+          <ul class="dash">
+            <li>Architected end-to-end AI evaluation pipelines with <b>30-check adversarial rubrics</b> across five quality families (oracle correctness, contract coherence, verifier rigor, environment determinism, anti-cheat isolation), each with CI-verifiable mutation probes and automated QC gates.</li>
+            <li>Delivered <b>6 accepted ML benchmark tasks</b> using compensatory fault architectures (4 interdependent bugs, pass@5&nbsp;=&nbsp;0.200). Built reproducible Docker environments with runtime-injected hidden datasets, anti-cheat controls and hash-pinned inputs targeting sub-40% model accuracy.</li>
+            <li>Conducted side-by-side (SxS) model output comparisons with structured, evidence-based rationales. Performed code quality evaluation covering syntactical validity, logic correctness, security vulnerability analysis and failure mode categorisation.</li>
+            <li>Designed guardrails and safety verification pipelines including symlink escape detection, behavioral injection testing and privilege-separation verification across containerized AI environments.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="tl-item grid rv">
+        <p class="tl-when label">Feb 2024 &ndash; Apr 2026</p>
+        <div class="tl-main">
+          <h3>Graduate Engineer Trainee</h3>
+          <p class="org">HCL Technologies, Chennai</p>
+          <ul class="dash">
+            <li>Designed and delivered Python automation frameworks for aerospace systems testing (Robot Framework, PyQt5), <b>reducing manual QA cycles by 40%</b> across three client sites. Maintained a 98% deployment uptime SLA.</li>
+            <li>Served as primary technical liaison: weekly client demonstrations, translating requirements into deliverables, and training end-users on the automation tools.</li>
+            <li>Led an embedded systems research collaboration with IISc Bangalore: built an STM32 + TOF sensor gesture-recognition prototype and resolved <b>I2C latency from 200&nbsp;ms to sub-50&nbsp;ms</b> through protocol-level diagnosis.</li>
+          </ul>
+        </div>
+      </article>
     </div>
   </div>
-</div>
+</section>
 
-<div class="sec" id="projects">
-  <div class="slbl rv">Featured Work</div>
-  <h2 class="sh rv d1">Projects I measured,<br>not just shipped.</h2>
-  <div class="bento">
-    <div class="bc c8 scan neon-b rv">
-      <div class="gblob" style="background:radial-gradient(circle,rgba(0,113,227,.5),transparent);top:-60px;right:-40px;width:220px;height:220px"></div>
-      <div class="feat-tag">&#9733; FLAGSHIP</div>
-      <div class="pbrow">Voice AI &middot; Telephony &middot; Oct 2026 (in progress)</div>
-      <div class="pname">Bolna Voice Agent: ATM Issue Desk</div>
-      <div class="pdesc">Ran the open-source Bolna voice-agent stack locally in Docker (Deepgram speech-to-text/text-to-speech, OpenAI LLM, Redis, 8&nbsp;kHz mu-law telephony audio) and traced a real call through it &mdash; webhook, websocket audio stream, transcriber, LLM, synthesizer.</div>
-      <div class="chips"><span class="chip cb">Bolna</span><span class="chip cb">Deepgram Nova-3</span><span class="chip cb">OpenAI</span><span class="chip ct">Docker</span><span class="chip cw">Redis</span><span class="chip cw">FastAPI</span></div>
-      <ul class="flist">
-        <li>Word error rate fell from 5.7% (default Nova-2) to 2.6% with Nova-3 + en-IN + 30 banking keyterms, measured across 180 test transcriptions on 30 recorded ATM-support sentences</li>
-        <li>Built a mock bank API (FastAPI) and a 5-tool ATM issue-desk agent &mdash; card status, block card, balance, mini statement, complaint &mdash; requiring caller confirmation before a card is blocked</li>
-        <li>Found and traced 3 real framework bugs: a Deepgram HTTP 400 from a mu-law/24&nbsp;kHz mismatch, a call endpoint that reports success even when Twilio rejects the call, and a Docker build pulling upstream code instead of the fork</li>
-      </ul>
-      <a href="https://github.com/ARajkumar45/bolna-atm-usecase" target="_blank" rel="noopener" class="plink">View on GitHub &#8599;</a>
+<section class="sec" id="skills" aria-labelledby="skills-h">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="label">03 / Skills</span>
+      <h2 id="skills-h">What I work <em>with</em>.</h2>
     </div>
-    <div class="c4" style="display:flex;flex-direction:column;gap:14px">
-      <div class="bc rv d1 neon-b" style="flex:1">
-        <div class="statbox"><div class="statn" style="color:var(--bl)">5.7%&rarr;2.6%</div><div class="statl">Word error rate, default vs. tuned Deepgram config</div></div>
+    <dl class="skills rv">
+      <div><dt>Voice AI</dt><dd>Bolna (open source), Deepgram Nova-3 speech-to-text and Aura-2 text-to-speech, OpenAI LLM, Redis, Docker. 8&nbsp;kHz mu-law telephony audio, keyterm prompting, word error rate evaluation (jiwer), websocket streaming.</dd></div>
+      <div><dt>LLM apps &amp; RAG</dt><dd>LangChain RAG pipelines: PDF loading, chunking, NVIDIA embeddings, vector similarity search. Prompt design for structured analysis. Prompt-level guardrails such as confirmation before irreversible actions.</dd></div>
+      <div><dt>Agents &amp; tool calling</dt><dd>Function and tool calling against REST APIs, Google ADK, LangChain. MCP (Model Context Protocol): daily use of connectors (Gmail, Google Drive, Calendar, browser automation) in Claude agent workflows.</dd></div>
+      <div><dt>LLM APIs &amp; prompting</dt><dd>Claude API, Gemini 2.5 Flash, OpenAI GPT, Llama 3.3-70B. System prompt design, structured outputs, few-shot and chain-of-thought prompting.</dd></div>
+      <div><dt>Evaluation</dt><dd>Adversarial rubric design, oracle verification, mutation testing, anti-cheat engineering, QC gate automation (37 executable checks), word error rate benchmarking, pass@k calibration, LangSmith tracing.</dd></div>
+      <div><dt>Engineering</dt><dd>Python (2+ years), FastAPI, Docker, Redis, Git, GitHub Actions CI/CD, GCP (Vertex AI, Cloud Storage), SQL, Streamlit, Node.js, JavaScript, Robot Framework, PyQt5.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="sec sec-alt" id="credentials" aria-labelledby="cred-h">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="label">04 / Certifications &amp; education</span>
+      <h2 id="cred-h">Credentials.</h2>
+    </div>
+    <div class="two rv">
+      <div>
+        <h3>Certifications</h3>
+        <div class="cert-group">
+          <h4>Google Cloud</h4>
+          <ul>
+            <li class="top">ADK Architect<span>ID 23321472</span></li>
+            <li>Agent Fundamentals</li>
+            <li>Vertex AI Studio</li>
+            <li>ADK Fundamentals</li>
+          </ul>
+        </div>
+        <div class="cert-group">
+          <h4>Google DeepMind <small>2026</small></h4>
+          <ul>
+            <li>Build Your Own SLM</li>
+            <li>Represent Your Language Data</li>
+            <li>Tokenize Texts into Subword Tokens</li>
+          </ul>
+        </div>
+        <div class="cert-group">
+          <h4>Anthropic / CodePath</h4>
+          <ul>
+            <li>AI Fluency for Builders</li>
+            <li>LangChain Academy</li>
+          </ul>
+        </div>
+        <div class="cert-group">
+          <h4>DeepLearning.AI <small>2026</small></h4>
+          <ul><li>ChatGPT Prompt Engineering for Developers</li></ul>
+        </div>
       </div>
-      <div class="bc rv d2 neon-p" style="flex:1;background:linear-gradient(135deg,rgba(0,113,227,.07),rgba(191,90,242,.05))">
-        <div class="pbrow" style="margin-bottom:8px;font-size:9px">Method</div>
-        <div style="font-size:14px;font-weight:500;line-height:1.5;color:rgba(255,255,255,.7);position:relative;z-index:1">jiwer word error rate on 180 transcriptions, not a demo video.</div>
+      <div>
+        <h3>Education</h3>
+        <div class="edu">
+          <h4>B.E. Electronics &amp; Communication Engineering</h4>
+          <p>Panimalar Institute of Technology, Chennai<br>2019 &ndash; 2023</p>
+          <p class="cgpa"><b>8.7</b><span>/ 10 CGPA</span></p>
+        </div>
       </div>
     </div>
-    <div class="bc c6 scan neon-g rv">
-      <div class="gblob" style="background:radial-gradient(circle,rgba(48,209,88,.4),transparent);bottom:-50px;left:-30px;width:200px;height:200px"></div>
-      <div class="new-tag">&#10022; CURRENT ROLE</div>
-      <div class="pbrow">AI Evaluation &middot; Benchmark Design &middot; QC Automation</div>
-      <div class="pname">Adversarial AI Evaluation Pipelines</div>
-      <div class="pdesc">At Handshake AI: architected end-to-end evaluation pipelines for frontier model benchmarking &mdash; a 30-check adversarial rubric across five quality families, each with CI-verifiable mutation probes and automated QC gates.</div>
-      <div class="chips"><span class="chip cg">Adversarial Rubrics</span><span class="chip cg">Mutation Testing</span><span class="chip ct">Docker</span><span class="chip cw">pass@k</span><span class="chip cw">Anti-Cheat</span></div>
-      <div class="ndgrid">
-        <div class="nd" style="--nf:3.2s"><div class="ndd" style="background:#2997ff;box-shadow:0 0 6px rgba(41,151,255,.6)"></div>Oracle Correctness</div>
-        <div class="nd" style="--nf:4.1s"><div class="ndd" style="background:#00c7be;box-shadow:0 0 6px rgba(0,199,190,.6)"></div>Contract Coherence</div>
-        <div class="nd" style="--nf:3.7s"><div class="ndd" style="background:#bf5af2;box-shadow:0 0 6px rgba(191,90,242,.6)"></div>Verifier Rigor</div>
-        <div class="nd" style="--nf:4.5s"><div class="ndd" style="background:#f5a623;box-shadow:0 0 6px rgba(245,166,35,.6)"></div>Anti-Cheat Isolation</div>
-      </div>
-      <ul class="flist" style="margin-top:14px">
-        <li>6 accepted ML benchmark tasks using compensatory fault architectures (4 interdependent bugs, pass@5 = 0.200)</li>
-        <li>Reproducible Docker environments with runtime-injected hidden datasets and hash-pinned inputs</li>
-      </ul>
-    </div>
-    <div class="bc c6 scan neon-t rv d1">
-      <div class="gblob" style="background:radial-gradient(circle,rgba(0,199,190,.35),transparent);top:-50px;right:-30px;width:200px;height:200px"></div>
-      <div class="pbrow">RAG Application &middot; Mar 2026 &middot; Streamlit</div>
-      <div class="pname">CareerLens AI</div>
-      <div class="pdesc">Retrieval-augmented resume analyzer: PDF resume loading, 1,000-character chunks with 200 overlap, NVIDIA embeddings (nv-embedqa-e5-v5) and top-5 similarity search against the job description, feeding Llama 3.3 70B.</div>
-      <div class="chips"><span class="chip ct">LangChain</span><span class="chip ct">NVIDIA Llama-3.3-70B</span><span class="chip cw">Embeddings</span><span class="chip cw">Streamlit</span></div>
-      <ul class="flist">
-        <li>Match score, matching and missing skills, three resume improvements</li>
-        <li>Apply-or-skip verdict generated directly in the Streamlit interface</li>
-      </ul>
-      <a href="https://github.com/ARajkumar45/CareerLens-AI" target="_blank" rel="noopener" class="plink">View on GitHub &#8599;</a>
-    </div>
   </div>
-</div>
+</section>
 
-<div class="sec sec-alt" id="skills">
-  <div class="slbl rv">Technical Stack</div>
-  <h2 class="sh rv d1">The tools I build with.</h2>
-  <div class="skgrid">
-    <div class="skc rv"><div class="skh"><div class="ski" style="background:rgba(48,209,88,.1)">&#127908;</div>Voice AI Pipelines</div><div class="sktags"><span class="skt hg">Bolna</span><span class="skt hg">Deepgram Nova-3</span><span class="skt hg">Aura-2 TTS</span><span class="skt">8kHz mu-law Telephony</span><span class="skt">Keyterm Prompting</span><span class="skt">jiwer / WER Evaluation</span><span class="skt">WebSocket Streaming</span></div></div>
-    <div class="skc rv d1"><div class="skh"><div class="ski" style="background:rgba(0,199,190,.1)">&#129504;</div>LLM Applications &amp; RAG</div><div class="sktags"><span class="skt ht">LangChain</span><span class="skt ht">RAG Pipelines</span><span class="skt">NVIDIA Embeddings</span><span class="skt">Vector Similarity Search</span><span class="skt">Prompt-Level Guardrails</span></div></div>
-    <div class="skc rv d2"><div class="skh"><div class="ski" style="background:rgba(191,90,242,.1)">&#129302;</div>Agentic AI &amp; Tool Calling</div><div class="sktags"><span class="skt hb">Function / Tool Calling</span><span class="skt hb">Google ADK</span><span class="skt hb">MCP Connectors</span><span class="skt">REST API Integration</span><span class="skt">Claude Agent Workflows</span></div></div>
-    <div class="skc rv"><div class="skh"><div class="ski" style="background:rgba(41,151,255,.1)">&#9729;&#65039;</div>LLM APIs &amp; Prompt Engineering</div><div class="sktags"><span class="skt hb">Claude API</span><span class="skt hb">Gemini 2.5 Flash</span><span class="skt">OpenAI GPT</span><span class="skt">Llama 3.3-70B</span><span class="skt">Structured Outputs</span><span class="skt">Few-Shot / CoT Prompting</span></div></div>
-    <div class="skc rv d1"><div class="skh"><div class="ski" style="background:rgba(245,166,35,.1)">&#128202;</div>AI Evaluation &amp; Observability</div><div class="sktags"><span class="skt hb">Adversarial Rubrics</span><span class="skt hb">Oracle Verification</span><span class="skt hb">Mutation Testing</span><span class="skt">Anti-Cheat Engineering</span><span class="skt">QC Gate Automation</span><span class="skt">pass@k Calibration</span><span class="skt">LangSmith Tracing</span></div></div>
-    <div class="skc rv d2"><div class="skh"><div class="ski" style="background:rgba(41,151,255,.08)">&#9881;&#65039;</div>Engineering Stack</div><div class="sktags"><span class="skt hb">Python</span><span class="skt hb">FastAPI</span><span class="skt">Docker</span><span class="skt">Redis</span><span class="skt">Git &amp; GitHub Actions CI/CD</span><span class="skt">GCP (Vertex AI)</span><span class="skt">SQL</span><span class="skt">JavaScript</span><span class="skt">HTML/CSS</span><span class="skt">Node.js</span><span class="skt">Robot Framework</span><span class="skt">PyQt5</span></div></div>
-  </div>
-</div>
-
-<div class="sec" id="experience">
-  <div class="slbl rv">Experience</div>
-  <h2 class="sh rv d1">Where I've built things.</h2>
-  <div class="tl">
-    <div class="tli rv">
-      <div class="tldot" style="background:var(--pur);box-shadow:0 0 18px rgba(191,90,242,.65)"></div>
-      <div class="tlper">Apr 2026 &ndash; Present</div>
-      <div class="tltit">AI Evaluation &amp; GenAI Engineer, Independent Contractor</div>
-      <div class="tlco" style="color:var(--pur)">Handshake AI &middot; Remote</div>
-      <ul class="tlpts">
-        <li>Architected end-to-end AI evaluation pipelines with 30-check adversarial rubrics across five quality families (oracle correctness, contract coherence, verifier rigor, environment determinism, anti-cheat isolation), each with CI-verifiable mutation probes and automated QC gates</li>
-        <li>Delivered 6 accepted ML benchmark tasks using compensatory fault architectures (4 interdependent bugs, pass@5 = 0.200); built reproducible Docker environments with runtime-injected hidden datasets, anti-cheat controls, and hash-pinned inputs</li>
-        <li>Conducted side-by-side (SxS) model output comparisons with structured evidence-based rationales; performed code quality evaluation covering syntactical validity, logic correctness, security vulnerability analysis, and failure mode categorisation</li>
-        <li>Designed guardrails and safety verification pipelines including symlink escape detection, behavioral injection testing, and privilege-separation verification across containerized AI environments</li>
-      </ul>
-    </div>
-    <div class="tli rv">
-      <div class="tldot"></div>
-      <div class="tlper">Feb 2024 &ndash; Apr 2026</div>
-      <div class="tltit">Graduate Engineer Trainee</div>
-      <div class="tlco">HCL Technologies &middot; Chennai</div>
-      <ul class="tlpts">
-        <li>Designed and delivered Python automation frameworks for aerospace systems testing (Robot Framework, PyQt5), reducing manual QA cycles by 40% across three client sites; maintained 98% deployment uptime SLA</li>
-        <li>Served as primary technical liaison &mdash; weekly client demonstrations, translating requirements into deliverables, training end-users on automation tools</li>
-        <li>Led embedded systems research collaboration with IISc Bangalore (below): resolved I2C latency from 200ms to sub-50ms through protocol-level diagnosis</li>
-      </ul>
-    </div>
-    <div class="tli rv d1">
-      <div class="tldot" style="background:var(--teal);box-shadow:0 0 18px rgba(0,199,190,.65)"></div>
-      <div class="tlper">Oct 2024 &ndash; Feb 2025</div>
-      <div class="tltit">AI Research Engineer (Deputation)</div>
-      <div class="tlco" style="color:var(--teal)">IISc Bangalore &middot; via HCL Technologies</div>
-      <ul class="tlpts">
-        <li>Developed a gesture recognition AI prototype using STM32 microcontrollers and Time-of-Flight sensor arrays at India's top research institute</li>
-        <li>Resolved I2C latency from 200ms to sub-50ms through protocol-level diagnosis &mdash; end-to-end sensor pipeline from raw signal capture to classification model validation</li>
-        <li>Collaborated with IISc research faculty on embedded AI system design and deployment</li>
-      </ul>
+<section class="sec contact" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <span class="label rv" style="display:block;margin-bottom:16px">05 / Contact</span>
+    <h2 id="contact-h" class="rv">Let&rsquo;s build something <em>measurable</em>.</h2>
+    <p class="sub rv">Based in Bengaluru and immediately available for AI engineering roles.</p>
+    <a class="mail rv" href="mailto:armugamvrajkumar121@gmail.com">armugamvrajkumar121@gmail.com</a>
+    <div class="reach rv">
+      <a href="https://www.linkedin.com/in/rajkumar45" target="_blank" rel="noopener"><span class="label">LinkedIn</span><span>linkedin.com/in/rajkumar45</span></a>
+      <a href="https://github.com/ARajkumar45" target="_blank" rel="noopener"><span class="label">GitHub</span><span>github.com/ARajkumar45</span></a>
+      <a href="tel:+917981031170"><span class="label">Phone</span><span>+91 7981031170</span></a>
+      <div><span class="label">Location</span><span>Bengaluru, India</span></div>
     </div>
   </div>
-</div>
+</section>
+</main>
 
-<div class="sec sec-alt" id="certs">
-  <div class="slbl rv">Credentials</div>
-  <h2 class="sh rv d1">Certified across the<br>AI stack.</h2>
-  <div class="cgrid">
-    <div class="cc hl rv"><div class="cci" style="background:rgba(0,113,227,.14)">&#129302;</div><div><div class="ccn">ADK Architect</div><div class="ccb">Google Cloud &middot; ID: 23321472</div><div class="cbadge cbblue">&#10003; Verified</div></div></div>
-    <div class="cc rv d1"><div class="cci" style="background:rgba(0,199,190,.12)">&#9729;&#65039;</div><div><div class="ccn">Agent Fundamentals / Vertex AI Studio / ADK Fundamentals</div><div class="ccb">Google Cloud &middot; 2026</div><div class="cbadge cbteal">GCP</div></div></div>
-    <div class="cc rv d2"><div class="cci" style="background:rgba(191,90,242,.14)">&#129902;</div><div><div class="ccn">Build Your Own SLM / Represent Your Language Data / Tokenize Texts into Subword Tokens</div><div class="ccb">Google DeepMind &middot; 2026</div><div class="cbadge cbpur">&#10022; DeepMind</div></div></div>
-    <div class="cc rv d3"><div class="cci" style="background:rgba(48,209,88,.1)">&#129309;</div><div><div class="ccn">AI Fluency for Builders</div><div class="ccb">Anthropic / CodePath</div><div class="cbadge cbteal">Verified</div></div></div>
-    <div class="cc rv d4"><div class="cci" style="background:rgba(0,113,227,.14)">&#128279;</div><div><div class="ccn">LangChain Academy Certification</div><div class="ccb">Anthropic / CodePath &middot; ID: mdhwmzyi6h</div><div class="cbadge cbblue">&#10003; Verified</div></div></div>
-    <div class="cc rv d5"><div class="cci" style="background:rgba(245,166,35,.12)">&#128172;</div><div><div class="ccn">ChatGPT Prompt Engineering for Developers</div><div class="ccb">DeepLearning.AI &middot; 2026</div><div class="cbadge cbamb">Verified</div></div></div>
-  </div>
-</div>
-
-<div class="ctwrap" id="contact">
-  <div class="ctglow"></div>
-  <div class="slbl rv" style="justify-content:center;margin-bottom:16px">Get In Touch</div>
-  <div class="cth rv d1">Ready to build<br>something real.</div>
-  <p class="cts rv d2">Available immediately. Based in Bengaluru, open to Pune, Chennai or fully remote AI Engineer roles.</p>
-  <div class="ctbtns rv d3">
-    <div class="mag"><a href="mailto:armugamvrajkumar121@gmail.com" class="btn btn-p">Send Email &rarr;</a></div>
-    <div class="mag"><a href="https://github.com/ARajkumar45" target="_blank" rel="noopener" class="btn btn-o">GitHub &#8599;</a></div>
-    <div class="mag"><a href="https://linkedin.com/in/rajkumar45" target="_blank" rel="noopener" class="btn btn-o">LinkedIn &#8599;</a></div>
-  </div>
-  <div class="ctinfo rv d4">
-    <a href="tel:+917981031170">+91 7981031170</a>
-    <span>Bengaluru, India</span>
-    <a href="https://github.com/ARajkumar45" target="_blank" rel="noopener">github.com/ARajkumar45</a>
-  </div>
-</div>
-<footer>
-  <div>Raj Kumar Arumugam &middot; AI Engineer &middot; 2026</div>
-  <div class="flinks">
-    <a href="https://github.com/ARajkumar45" target="_blank" rel="noopener">GitHub</a>
-    <a href="https://linkedin.com/in/rajkumar45" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="mailto:armugamvrajkumar121@gmail.com">Email</a>
+<footer class="foot">
+  <div class="wrap">
+    <p>&copy; <span id="yr">2026</span> Raj Kumar Arumugam</p>
+    <nav aria-label="Footer">
+      <a href="https://github.com/ARajkumar45" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/rajkumar45" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:armugamvrajkumar121@gmail.com">Email</a>
+      <a href="#top">Back to top</a>
+    </nav>
   </div>
 </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
 
-/* LOADER */
-window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('done'),500));
-const isMob=/Mobi|Android|iPhone/i.test(navigator.userAgent)||innerWidth<768;
-
-/* CURSOR */
-const curEl=document.getElementById('cur');
-if(!isMob){
-  let cx=innerWidth/2,cy=innerHeight/2,tx=cx,ty=cy;
-  document.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;},{passive:true});
-  document.addEventListener('mousedown',()=>curEl.classList.add('click'));
-  document.addEventListener('mouseup',()=>curEl.classList.remove('click'));
-  document.querySelectorAll('a,.bc,.skc,.cc,.nd,.mpn,.chip,.skt,.btn,.flinks a').forEach(el=>{
-    el.addEventListener('mouseenter',()=>curEl.classList.add('hover'));
-    el.addEventListener('mouseleave',()=>curEl.classList.remove('hover'));
-  });
-  (function cl(){cx+=(tx-cx)*.13;cy+=(ty-cy)*.13;curEl.style.left=cx+'px';curEl.style.top=cy+'px';requestAnimationFrame(cl);})();
-}else{curEl.style.display='none';}
-
-/* SCROLL PROGRESS + NAV */
-const pbar=document.getElementById('progress'),navEl=document.getElementById('nav');
-window.addEventListener('scroll',()=>{
-  const s=scrollY,h=document.body.scrollHeight-innerHeight;
-  pbar.style.width=(s/h*100).toFixed(2)+'%';
-  navEl.classList.toggle('solid',s>10);
-  document.querySelectorAll('.nlinks a').forEach(a=>{
-    const sec=document.querySelector(a.getAttribute('href'));
-    if(!sec)return;
-    const r=sec.getBoundingClientRect();
-    a.classList.toggle('act',r.top<=80&&r.bottom>80);
-  });
-},{passive:true});
-
-/* MOBILE DRAWER */
-const hbgEl=document.getElementById('hbg'),drawEl=document.getElementById('drawer');
-hbgEl.addEventListener('click',()=>{
-  const o=hbgEl.classList.toggle('open');
-  drawEl.classList.toggle('open',o);
-  document.body.classList.toggle('lock',o);
-});
-document.querySelectorAll('.dl').forEach(a=>a.addEventListener('click',()=>{
-  hbgEl.classList.remove('open');drawEl.classList.remove('open');document.body.classList.remove('lock');
-}));
-
-/* MAGNETIC BUTTONS */
-document.querySelectorAll('.mag').forEach(w=>{
-  const b=w.querySelector('.btn');
-  w.addEventListener('mousemove',e=>{
-    const r=w.getBoundingClientRect();
-    b.style.transform='translate('+(e.clientX-(r.left+r.width/2))*.32+'px,'+(e.clientY-(r.top+r.height/2))*.32+'px)';
-  });
-  w.addEventListener('mouseleave',()=>{b.style.transform='';});
-});
-
-/* 3D CARD TILT */
-if(!isMob){
-  document.querySelectorAll('.bc').forEach(c=>{
-    c.addEventListener('mousemove',e=>{
-      const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-      c.style.setProperty('--rx',(-y*8)+'deg');c.style.setProperty('--ry',(x*8)+'deg');
-      c.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
-      c.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
-      c.classList.add('tilt');
-    });
-    c.addEventListener('mouseleave',()=>{c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg');c.classList.remove('tilt');});
-  });
-}
-
-/* TYPEWRITER */
-const words=['measured, not assumed','voice AI pipelines','RAG applications','adversarial evaluations','tool-calling agents','production AI systems'];
-const tyEl=document.getElementById('typer');
-let wi=0,ci=0,del=false,pause=false;
-function tStep(){
-  if(pause){pause=false;setTimeout(tStep,1800);return;}
-  const w=words[wi];
-  if(!del){
-    tyEl.textContent=w.substring(0,++ci);
-    if(ci===w.length){del=true;pause=true;}
-    setTimeout(tStep,68+Math.random()*40);
-  }else{
-    tyEl.textContent=w.substring(0,--ci);
-    if(ci===0){del=false;wi=(wi+1)%words.length;}
-    setTimeout(tStep,36);
-  }
-}
-setTimeout(tStep,2200);
-
-/* COUNTERS */
-document.querySelectorAll('.mnum[data-t]').forEach(el=>{
-  const t=parseInt(el.dataset.t),sup=el.querySelector('sup'),suf=sup?sup.outerHTML:'';
-  const ob=new IntersectionObserver(([e])=>{
-    if(!e.isIntersecting)return;
-    const s=performance.now();
-    (function tick(n){const p=Math.min((n-s)/950,1),ease=1-Math.pow(1-p,3);el.innerHTML=Math.round(t*ease)+suf;if(p<1)requestAnimationFrame(tick);else el.innerHTML=t+suf;})(s);
-    ob.disconnect();
-  },{threshold:.5});
-  ob.observe(el);
-});
-
-/* SCROLL REVEAL */
-const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.07});
-document.querySelectorAll('.rv,.tli,.cc').forEach(el=>rio.observe(el));
-
-/* PARALLAX ORBS */
-window.addEventListener('scroll',()=>{
-  const s=scrollY;
-  document.querySelector('.o1').style.transform='translate('+s*.02+'px,'+s*.035+'px)';
-  document.querySelector('.o2').style.transform='translate('+(-s*.015)+'px,'+s*.025+'px)';
-  document.querySelector('.o3').style.transform='translate('+s*.008+'px,'+(-s*.02)+'px)';
-},{passive:true});
-
-/* ================================================================
-   ADVANCED ANTIGRAVITY NEURAL MESH PARTICLE ENGINE
-   ================================================================
-   3 particle tiers:
-     Type 0 — CORE NODES    large pulsing halos, attract others
-     Type 1 — RELAY NODES   medium coloured dots, main connectors
-     Type 2 — AMBIENT       tiny dim specks, fill the field
-   Physics:
-     - Antigravity: all particles have upward lift bias
-     - Wander: slow sinusoidal horizontal drift
-     - Mouse field: gentle gravity well at cursor
-     - Gravity wells: 4 floating attractors that drift around
-     - Inter-connection: lines drawn between nearby particles
-       with colour, opacity, and glow scaled by proximity
-   ================================================================ */
-(function(){
-  const bgC=document.getElementById('bg-canvas'),pC=document.getElementById('particle-canvas');
-  const bgX=bgC.getContext('2d'),pX=pC.getContext('2d');
-  let W,H,mouse={x:-9999,y:-9999,active:false},ripples=[];
-
-  function resize(){W=bgC.width=pC.width=innerWidth;H=bgC.height=pC.height=innerHeight;}
-  resize();
-  window.addEventListener('resize',resize,{passive:true});
-  document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;mouse.active=true;},{passive:true});
-  document.addEventListener('mouseleave',()=>{mouse.active=false;});
-  document.addEventListener('click',e=>{ripples.push({x:e.clientX,y:e.clientY,r:0,a:.55});});
-  document.addEventListener('touchmove',e=>{mouse.x=e.touches[0].clientX;mouse.y=e.touches[0].clientY;mouse.active=true;},{passive:true});
-
-  /* colour palette */
-  const PAL=[{h:210,s:100,l:68},{h:180,s:100,l:60},{h:270,s:80,l:72},{h:200,s:100,l:80},{h:165,s:90,l:65}];
-
-  /* ── NODE CLASS ── */
-  class Node{
-    constructor(type){this.type=type;this.reset(true);}
-    reset(init=false){
-      this.x=Math.random()*W;
-      this.y=init?Math.random()*H:H+25;
-      const sp=this.type===0?.4:this.type===1?.65:1.05;
-      this.vx=(Math.random()-.5)*(this.type===2?.5:.35);
-      this.vy=-(Math.random()*sp+.15);   /* upward — antigravity */
-      const c=PAL[Math.floor(Math.random()*PAL.length)];
-      this.h=c.h+(Math.random()-.5)*22;this.s=c.s;this.l=c.l;
-      this.r=this.type===0?3.5+Math.random()*2.5:this.type===1?1.8+Math.random()*1.6:.5+Math.random()*1.1;
-      this.bA=this.type===0?.88+Math.random()*.12:this.type===1?.55+Math.random()*.25:.14+Math.random()*.22;
-      this.alpha=this.bA;this.life=1;
-      this.decay=this.type===2?.0013+Math.random()*.001:.0006+Math.random()*.0006;
-      this.pT=Math.random()*Math.PI*2;this.pS=.022+Math.random()*.02;
-      this.wA=Math.random()*Math.PI*2;
-    }
-    update(t){
-      /* antigravity lift — stronger for smaller particles */
-      this.vy-=this.type===0?.0012:this.type===1?.0016:.0022;
-      /* speed cap */
-      const sp=Math.sqrt(this.vx*this.vx+this.vy*this.vy),cap=this.type===2?1.8:1.3;
-      if(sp>cap){this.vx*=cap/sp;this.vy*=cap/sp;}
-      /* wander */
-      this.wA+=(Math.random()-.5)*.16;
-      this.vx+=Math.cos(this.wA)*.006;
-      /* air resistance */
-      this.vx*=.994;this.vy*=.996;
-      /* slow sine drift */
-      this.vx+=Math.sin(t*.00048+this.y*.009)*.005;
-      /* mouse gravity well */
-      if(mouse.active){
-        const dx=mouse.x-this.x,dy=mouse.y-this.y,d=Math.sqrt(dx*dx+dy*dy);
-        if(d<220&&d>1){const f=(220-d)/220*(this.type===0?.024:.016);this.vx+=(dx/d)*f;this.vy+=(dy/d)*f;}
-        this.alpha=d<80?Math.min(1,this.bA*(1+(80-d)/45)):this.bA;
-      }
-      /* wrap horizontally */
-      if(this.x<-20)this.x=W+20;if(this.x>W+20)this.x=-20;
-      this.x+=this.vx;this.y+=this.vy;
-      this.life-=this.decay;
-      if(this.type===0)this.pT+=this.pS;
-      if(this.life<=0||this.y<-30)this.reset();
-    }
-    draw(ctx){
-      const ea=this.alpha*this.life;if(ea<.01)return;
-      if(this.type===0){
-        /* CORE — pulsing halo + bright nucleus */
-        const pulse=1+Math.sin(this.pT)*.38,hr=this.r*2.8*pulse;
-        const g=ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,hr);
-        g.addColorStop(0,'hsla('+this.h+','+this.s+'%,'+this.l+'%,'+ea*.85+')');
-        g.addColorStop(.38,'hsla('+this.h+','+this.s+'%,'+this.l+'%,'+ea*.2+')');
-        g.addColorStop(1,'hsla('+this.h+','+this.s+'%,'+this.l+'%,0)');
-        ctx.beginPath();ctx.arc(this.x,this.y,hr,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
-        ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
-        ctx.fillStyle='hsla('+this.h+','+this.s+'%,92%,'+ea+')';
-        ctx.shadowBlur=12;ctx.shadowColor='hsla('+this.h+',100%,72%,.9)';
-        ctx.fill();ctx.shadowBlur=0;
-      }else if(this.type===1){
-        /* RELAY — radial glow + solid dot */
-        const g=ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.r*2.4);
-        g.addColorStop(0,'hsla('+this.h+','+this.s+'%,'+this.l+'%,'+ea+')');
-        g.addColorStop(1,'hsla('+this.h+','+this.s+'%,'+this.l+'%,0)');
-        ctx.beginPath();ctx.arc(this.x,this.y,this.r*2.4,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
-        ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
-        ctx.fillStyle='hsla('+this.h+','+this.s+'%,87%,'+ea+')';ctx.fill();
-      }else{
-        /* AMBIENT — tiny dim speck */
-        ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
-        ctx.fillStyle='hsla('+this.h+','+this.s+'%,70%,'+ea*.65+')';ctx.fill();
-      }
-    }
-  }
-
-  /* build pool */
-  const CC=isMob?6:20,CR=isMob?20:70,CA=isMob?28:120;
-  const nodes=[];
-  for(let i=0;i<CC;i++)nodes.push(new Node(0));
-  for(let i=0;i<CR;i++)nodes.push(new Node(1));
-  for(let i=0;i<CA;i++)nodes.push(new Node(2));
-
-  /* floating gravity wells */
-  const wells=[
-    {x:W*.22,y:H*.28,vx:.28,vy:-.16,str:95},
-    {x:W*.78,y:H*.55,vx:-.22,vy:.20,str:85},
-    {x:W*.50,y:H*.18,vx:.18,vy:.24,str:75},
-    {x:W*.35,y:H*.72,vx:-.16,vy:-.18,str:60},
-  ];
-
-  /* connection distance by type pair */
-  function cDist(a,b){
-    if(a.type===0&&b.type===0)return 230;
-    if(a.type===0||b.type===0)return 175;
-    if(a.type===1&&b.type===1)return 135;
-    return 82;
-  }
-
-  /* draw the neural mesh connections */
-  function drawMesh(ctx){
-    const len=nodes.length;
-    for(let i=0;i<len;i++){
-      const a=nodes[i];if(a.life<.05)continue;
-      for(let j=i+1;j<len;j++){
-        const b=nodes[j];if(b.life<.05)continue;
-        if(a.type===2&&b.type===2)continue;   /* skip ambient-ambient */
-        const dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
-        const maxD=cDist(a,b);if(d>maxD)continue;
-        const prox=1-d/maxD;  /* 1=touching, 0=at threshold */
-        let alpha=prox*prox*a.life*b.life*.58;
-        /* mouse boost — lines near cursor glow */
-        if(mouse.active){
-          const mx2=(a.x+b.x)/2-mouse.x,my2=(a.y+b.y)/2-mouse.y;
-          const md=Math.sqrt(mx2*mx2+my2*my2);
-          if(md<180)alpha*=1+(180-md)/90;
-        }
-        alpha=Math.min(.75,alpha);if(alpha<.006)continue;
-        const hB=(a.h+b.h)/2,sB=(a.s+b.s)/2;
-        const lw=(a.type===0&&b.type===0)?.5+prox*1.8:.25+prox*1.0;
-        ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
-        ctx.strokeStyle='hsla('+hB+','+sB+'%,74%,'+alpha+')';
-        ctx.lineWidth=lw;
-        /* extra glow for close core-core pairs */
-        if(a.type===0&&b.type===0&&prox>.55){ctx.shadowBlur=10;ctx.shadowColor='hsla('+hB+',100%,72%,.45)';}
-        ctx.stroke();ctx.shadowBlur=0;
-      }
-    }
-  }
-
-  /* scrolling dot-grid background */
-  function drawGrid(ctx,t){
-    ctx.clearRect(0,0,W,H);
-    const gs=42,ox=(t*.007)%gs,oy=(t*.005)%gs;
-    ctx.strokeStyle='rgba(255,255,255,.018)';ctx.lineWidth=.5;
-    ctx.beginPath();
-    for(let x=-gs+ox;x<W+gs;x+=gs){ctx.moveTo(x,0);ctx.lineTo(x,H);}
-    for(let y=-gs+oy;y<H+gs;y+=gs){ctx.moveTo(0,y);ctx.lineTo(W,y);}
-    ctx.stroke();
-    ctx.fillStyle='rgba(255,255,255,.036)';
-    for(let x=-gs+ox;x<W+gs;x+=gs)
-      for(let y=-gs+oy;y<H+gs;y+=gs)
-        {ctx.beginPath();ctx.arc(x,y,.9,0,Math.PI*2);ctx.fill();}
-  }
-
-  /* click ripples */
-  function drawRipples(ctx){
-    ripples=ripples.filter(r=>r.a>.005);
-    ripples.forEach(r=>{
-      ctx.beginPath();ctx.arc(r.x,r.y,r.r,0,Math.PI*2);
-      ctx.strokeStyle='rgba(41,151,255,'+r.a+')';ctx.lineWidth=1.5;ctx.stroke();
-      if(r.r>38){
-        ctx.beginPath();ctx.arc(r.x,r.y,r.r*.6,0,Math.PI*2);
-        ctx.strokeStyle='rgba(0,199,190,'+(r.a*.5)+')';ctx.lineWidth=1;ctx.stroke();
-      }
-      r.r+=4.8;r.a-=.022;
-    });
-  }
-
-  /* main loop */
-  let t=0;
-  function animate(){
-    t++;
-    drawGrid(bgX,t);
-    pX.clearRect(0,0,W,H);
-    /* gravity wells */
-    wells.forEach(w=>{
-      w.x+=w.vx;w.y+=w.vy;
-      if(w.x<0||w.x>W)w.vx*=-1;if(w.y<0||w.y>H)w.vy*=-1;
-      nodes.forEach(n=>{
-        const dx=w.x-n.x,dy=w.y-n.y,d=Math.sqrt(dx*dx+dy*dy);
-        if(d<w.str&&d>1){const f=(w.str-d)/w.str*.0012;n.vx+=(dx/d)*f;n.vy+=(dy/d)*f;}
-      });
-    });
-    nodes.forEach(n=>n.update(t));
-    drawMesh(pX);               /* connections — behind nodes */
-    nodes.forEach(n=>n.draw(pX)); /* nodes on top */
-    drawRipples(pX);
-    requestAnimationFrame(animate);
-  }
-  animate();
-})();
-
-/* 3D AGENTIC NETWORK — WebGL hero centerpiece */
-(function(){
-  if(isMob||typeof THREE==='undefined')return;
-  const mount=document.getElementById('three-hero');
-  if(!mount)return;
-  let w=innerWidth,h=innerHeight;
-  const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(50,w/h,0.1,100);
-  camera.position.z=11;
-  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  renderer.setSize(w,h);
-  mount.appendChild(renderer.domElement);
-
-  const group=new THREE.Group();
-  scene.add(group);
-
-  /* Core — wireframe icosahedron, "the model" */
-  const coreGeo=new THREE.IcosahedronGeometry(2.1,1);
-  const coreMat=new THREE.MeshBasicMaterial({color:0x2997ff,wireframe:true,transparent:true,opacity:.2});
-  const core=new THREE.Mesh(coreGeo,coreMat);
-  group.add(core);
-
-  /* Agent nodes orbiting the core, connected by lines — "multi-agent orchestration" */
-  const AGENTS=8,orbitR=4.1,nodeGroup=new THREE.Group();
-  const colors=[0x2997ff,0x00c7be,0xbf5af2,0xf5a623];
-  const nodeMeshes=[],linePositions=[];
-  for(let i=0;i<AGENTS;i++){
-    const phi=Math.acos(1-2*(i+.5)/AGENTS),theta=Math.PI*(1+Math.sqrt(5))*i;
-    const x=orbitR*Math.cos(theta)*Math.sin(phi),y=orbitR*Math.sin(theta)*Math.sin(phi),z=orbitR*Math.cos(phi);
-    const col=colors[i%colors.length];
-    const geo=new THREE.SphereGeometry(0.095,16,16);
-    const mat=new THREE.MeshBasicMaterial({color:col});
-    const node=new THREE.Mesh(geo,mat);
-    node.position.set(x,y,z);
-    node.userData={base:new THREE.Vector3(x,y,z),phase:Math.random()*Math.PI*2,col};
-    nodeGroup.add(node);nodeMeshes.push(node);
-    const glow=new THREE.Mesh(new THREE.SphereGeometry(0.2,12,12),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.18}));
-    glow.position.copy(node.position);node.userData.glow=glow;nodeGroup.add(glow);
-    linePositions.push(0,0,0,x,y,z);
-  }
-  group.add(nodeGroup);
-  const lineGeo=new THREE.BufferGeometry();
-  lineGeo.setAttribute('position',new THREE.Float32BufferAttribute(linePositions,3));
-  const lineMat=new THREE.LineBasicMaterial({color:0x2997ff,transparent:true,opacity:.14});
-  const lines=new THREE.LineSegments(lineGeo,lineMat);
-  group.add(lines);
-
-  /* faint starfield for depth */
-  const starGeo=new THREE.BufferGeometry();
-  const starCount=220,starPos=new Float32Array(starCount*3);
-  for(let i=0;i<starCount*3;i++)starPos[i]=(Math.random()-.5)*26;
-  starGeo.setAttribute('position',new THREE.Float32BufferAttribute(starPos,3));
-  const stars=new THREE.Points(starGeo,new THREE.PointsMaterial({color:0xffffff,size:0.025,transparent:true,opacity:.35}));
-  scene.add(stars);
-
-  let mx=0,my=0;
-  window.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5);},{passive:true});
-
-  function resize(){
-    w=innerWidth;h=innerHeight;
-    camera.aspect=w/h;camera.updateProjectionMatrix();
-    renderer.setSize(w,h);
-  }
-  window.addEventListener('resize',resize);
-
-  const heroEl=document.querySelector('.hero');
-  const io=new IntersectionObserver(es=>es.forEach(e=>mount.classList.toggle('in',e.isIntersecting)),{threshold:.1});
-  if(heroEl)io.observe(heroEl);
-
-  const clock=new THREE.Clock();
-  let visible=true;
-  document.addEventListener('visibilitychange',()=>{visible=!document.hidden;});
-  function tick(){
-    requestAnimationFrame(tick);
-    if(!visible)return;
-    const t=clock.getElapsedTime();
-    group.rotation.y=t*0.09+mx*0.5;
-    group.rotation.x=Math.sin(t*0.12)*0.12+my*0.35;
-    core.rotation.y=-t*0.05;
-    nodeMeshes.forEach(n=>{
-      const b=n.userData.base,ph=n.userData.phase;
-      const pulse=1+Math.sin(t*1.6+ph)*0.12;
-      n.position.set(b.x*pulse,b.y*pulse,b.z*pulse);
-      n.userData.glow.position.copy(n.position);
-      const s=1+Math.sin(t*2.2+ph)*0.35;
-      n.userData.glow.scale.setScalar(s);
-    });
-    camera.position.x+=(mx*1.1-camera.position.x)*0.02;
-    camera.position.y+=(-my*1.1-camera.position.y)*0.02;
-    camera.lookAt(0,0,0);
-    renderer.render(scene,camera);
-  }
-  tick();
-})();
-
-</script>
+<script src="js/main.js" defer></script>
 </body>
 </html>
